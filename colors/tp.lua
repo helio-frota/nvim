@@ -42,6 +42,7 @@ hl("Keyword", nil, keywords1, nil)
 hl("Keyword2", nil, keywords2, nil)
 hl("LineNr", nil, line_number, nil)
 hl("Number", nil, numbers, nil)
+hl("Boolean", nil, numbers, nil)
 hl("Normal", background, text, nil)
 hl("Visual", selected_text, background, nil)
 
