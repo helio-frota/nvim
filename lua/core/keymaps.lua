@@ -30,7 +30,7 @@ k.set("i", "<C-y>", "<C-o><C-r>", { silent = true, desc = "Redo" })
 -- Leader --
 --
 k.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame toggle" })
-k.set("n", "<leader>ws", ":ToggleWhitespace<CR>", { desc = "White space toggle" })
+-- k.set("n", "<leader>ws", ":ToggleWhitespace<CR>", { desc = "White space toggle" })
 k.set("n", "<leader>to", ":tabnew<CR>", { desc = "New tab" })
 k.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close tab" })
 k.set("n", "<leader>tn", ":tabn<CR>", { desc = "Next tab" })

@@ -21,8 +21,8 @@ local lazy_config = require "core.lazy"
 -- Initialize lazy with dynamic loading of anything in the plugins directory
 require("lazy").setup("plugins", {
   change_detection = {
-    enabled = true, -- auto check for config file changes and reload the UI
-    notify = false, -- turn off notifications whenever plugin changes are made
+    enabled = true,
+    notify = false,
   },
 }, lazy_config)
 
