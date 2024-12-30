@@ -1,4 +1,3 @@
--- Bootstrap lazy
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -6,26 +5,21 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   }
 end
 vim.opt.rtp:prepend(lazypath)
 
--- This has to be set before initializing lazy
 vim.g.mapleader = " "
 vim.cmd [[colorscheme tp]]
 
-local lazy_config = require "core.lazy"
-
--- Initialize lazy with dynamic loading of anything in the plugins directory
-require("lazy").setup("plugins", {
-  change_detection = {
-    enabled = true,
-    notify = false,
+require("lazy").setup {
+  spec = {
+    { import = "plugins" },
   },
-}, lazy_config)
+  checker = { enabled = true },
+}
 
--- These modules are not loaded by lazy
 require "core.options"
 require "core.keymaps"

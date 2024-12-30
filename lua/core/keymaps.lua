@@ -27,6 +27,8 @@ k.set("i", "<C-z>", "<C-o>u", { silent = true, desc = "Undo" })
 k.set("n", "<C-y>", "<C-r>", { silent = true, desc = "Redo" })
 k.set("i", "<C-y>", "<C-o><C-r>", { silent = true, desc = "Redo" })
 
+k.set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
+
 -- Leader --
 --
 k.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame toggle" })
