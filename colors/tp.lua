@@ -11,6 +11,7 @@ local comments = "#008000"
 local info = "#008000"
 local selected_text = "#0078d7"
 local chars_and_strings = "#008080"
+local chars_and_strings_2 = "#007676"
 local numbers = "#AD4011"
 local brackets = "#ff0000"
 local error = "#ff0000"
@@ -28,7 +29,7 @@ local title = "#99b4d1"
 local string_escape = "#465a7d"
 local background = "#fefefe"
 
-hl("Character", nil, chars_and_strings, nil)
+hl("Character", nil, chars_and_strings_2, nil)
 hl("IncSearch", match_search, nil, nil)
 hl("Comment", nil, comments, "italic")
 hl("CursorLine", cursor_line, nil, nil)
