@@ -29,6 +29,7 @@ k.set("i", "<C-y>", "<C-o><C-r>", { silent = true, desc = "Redo" })
 
 k.set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
 
+k.set("n", "J", "mzJ`z")
 -- Leader --
 --
 k.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame toggle" })
@@ -53,3 +54,12 @@ k.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 k.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Refactor rename" })
 k.set({ "n", "v" }, "<leader>ct", vim.lsp.buf.code_action, { desc = "Available code actions" })
 k.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Find all references" })
+
+-- obsidian
+k.set("n", "<leader>on", ":ObsidianNew", { desc = "New obsidian note" })
+k.set("n", "<leader>os", ":ObsidianSearch", { desc = "Search notes" })
+k.set("n", "<leader>ot", ":ObsidianTags", { desc = "List tags" })
+k.set("n", "<leader>oqs", ":ObsidianQuickSwitch", { desc = "Quick switch to other note" })
+k.set("n", "<leader>ont", ":ObsidianToday", { desc = "Today daily note" })
+k.set("n", "<leader>ony", ":ObsidianYesterday", { desc = "Yesterday daily note" })
+k.set("n", "<leader>ond", ":ObsidianDailies", { desc = "List daily notes" })

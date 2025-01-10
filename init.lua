@@ -14,6 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.cmd [[colorscheme tp]]
 
+vim.opt.conceallevel = 1
+
 require("lazy").setup {
   spec = {
     { import = "plugins" },
