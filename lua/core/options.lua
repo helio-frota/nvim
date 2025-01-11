@@ -1,35 +1,29 @@
 local o = vim.opt
 
--- line numbers
-o.nu = true
-
--- tabs, indent and wrap
-o.tabstop = 4
-o.softtabstop = 4
-o.shiftwidth = 4
-o.expandtab = true
-o.smartindent = true
-o.wrap = false
-
--- search
-o.hlsearch = false
-o.incsearch = true
-o.ignorecase = true
-o.smartcase = true
-
--- appearance
-o.cursorline = true
 o.background = "light"
-o.termguicolors = true
-
--- other
-o.swapfile = false
 o.backup = false
-o.scrolloff = 8
-o.updatetime = 50
+o.breakindent = true
+o.clipboard = "unnamedplus"
+o.cursorline = true
+o.expandtab = true
 o.foldmethod = "manual"
-o.clipboard:append "unnamedplus"
+o.hlsearch = false
+o.ignorecase = true
+o.incsearch = true
+o.number = true
+o.scrolloff = 8
+o.shiftwidth = 4
+o.signcolumn = "yes"
+o.smartcase = true
+o.smartindent = true
+o.softtabstop = 4
 o.spell = true
 o.spelllang = "en_us"
+o.swapfile = false
+o.tabstop = 4
+o.termguicolors = true
+o.timeoutlen = 300
+o.updatetime = 250
+o.wrap = false
 
-vim.lsp.inlay_hint.enable(true)
+vim.lsp.inlay_hint.enable(false)

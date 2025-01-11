@@ -1,61 +1,60 @@
 local k = vim.keymap
 
--- Non-leader --
---
--- Window navigation
-k.set("n", "<C-k>", ":wincmd k<CR>")
-k.set("n", "<C-j>", ":wincmd j<CR>")
-k.set("n", "<C-h>", ":wincmd h<CR>")
-k.set("n", "<C-l>", ":wincmd l<CR>")
+-- Non-leader ----------
 
--- NvimTree toggle
+-- Navigation
+k.set("n", "<C-k>", "<C-w><C-k>")
+k.set("n", "<C-j>", "<C-w><C-j>")
+k.set("n", "<C-h>", "<C-w><C-h>")
+k.set("n", "<C-l>", "<C-w><C-l>")
+
+k.set("n", "<left>", '<cmd>echo "Use h to move 󱗗"<CR>')
+k.set("n", "<right>", '<cmd>echo "Use l to move 󱗗"<CR>')
+k.set("n", "<up>", '<cmd>echo "Use k to move 󱗗"<CR>')
+k.set("n", "<down>", '<cmd>echo "Use j to move 󱗗"<CR>')
+
+-- Toggle
 k.set("n", "<C-n>", ":NvimTreeToggle<CR>")
-
--- Inlay hint toggle
 k.set("n", "<C-i>", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 
--- Copy, Paste, Undo, Redo
-k.set("n", "<C-s>", ":write<CR>", { silent = true, desc = "Save" })
-k.set("v", "<C-c>", '"+y', { silent = true, desc = "Copy to clipboard" })
-k.set("n", "<C-v>", '"+p', { silent = true, desc = "Paste from clipboard" })
-k.set("i", "<C-v>", "<C-r>+", { silent = true, desc = "Paste from clipboard" })
-k.set("v", "<C-x>", '"+d', { silent = true, desc = "Cut to clipboard" })
-k.set("n", "<C-z>", "u", { silent = true, desc = "Undo" })
-k.set("i", "<C-z>", "<C-o>u", { silent = true, desc = "Undo" })
-k.set("n", "<C-y>", "<C-r>", { silent = true, desc = "Redo" })
-k.set("i", "<C-y>", "<C-o><C-r>", { silent = true, desc = "Redo" })
-
-k.set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
-
+-- Copy, Paste, Undo, Redo, Select all, Join lines
+k.set("n", "<C-s>", ":write<CR>")
+k.set("v", "<C-c>", '"+y', { silent = true })
+k.set("n", "<C-v>", '"+p')
+k.set("i", "<C-v>", "<C-r>+")
+k.set("v", "<C-x>", '"+d')
+k.set("n", "<C-z>", "u")
+k.set("i", "<C-z>", "<C-o>u")
+k.set("n", "<C-y>", "<C-r>")
+k.set("i", "<C-y>", "<C-o><C-r>")
+k.set("n", "<C-a>", "ggVG", { noremap = true })
 k.set("n", "J", "mzJ`z")
--- Leader --
---
+
+-- Leader ----------
+k.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 k.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame toggle" })
--- k.set("n", "<leader>ws", ":ToggleWhitespace<CR>", { desc = "White space toggle" })
 k.set("n", "<leader>to", ":tabnew<CR>", { desc = "New tab" })
 k.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close tab" })
 k.set("n", "<leader>tn", ":tabn<CR>", { desc = "Next tab" })
 k.set("n", "<leader>tp", ":tabp<CR>", { desc = "Previous tab" })
 k.set("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
+
 local t = require "telescope.builtin"
-k.set("n", "<leader>fd", ":Telescope diagnostics<CR>", { desc = "Telescope diagnostics" })
-k.set("n", "<leader>ff", t.find_files, { desc = "Find files" })
-k.set("n", "<leader>fg", t.live_grep, { desc = "Live grep" })
-k.set("n", "<leader>fb", t.buffers, { desc = "Switch buffers" })
-k.set("n", "<leader>fh", t.help_tags, { desc = "Help tags" })
-k.set("n", "<leader>fu", t.current_buffer_fuzzy_find, { desc = "Find in current buffer" })
-k.set("n", "<leader>fo", t.lsp_document_symbols, { desc = "LSP symbols" })
-k.set("n", "<leader>fi", t.lsp_incoming_calls, { desc = "LSP incoming calls" })
 
--- LSP related stuff
-k.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-k.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Refactor rename" })
-k.set({ "n", "v" }, "<leader>ct", vim.lsp.buf.code_action, { desc = "Available code actions" })
-k.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Find all references" })
+k.set("n", "<leader>sh", t.help_tags, { desc = "[S]earch [H]elp" })
+k.set("n", "<leader>sk", t.keymaps, { desc = "[S]earch [K]eymaps" })
+k.set("n", "<leader>sf", t.find_files, { desc = "[S]earch [F]iles" })
+k.set("n", "<leader>ss", t.builtin, { desc = "[S]earch [S]elect Telescope" })
+k.set("n", "<leader>sw", t.grep_string, { desc = "[S]earch current [W]ord" })
+k.set("n", "<leader>sg", t.live_grep, { desc = "[S]earch by [G]rep" })
+k.set("n", "<leader>sd", t.diagnostics, { desc = "[S]earch [D]iagnostics" })
+k.set("n", "<leader>sr", t.resume, { desc = "[S]earch [R]esume" })
+k.set("n", "<leader>s.", t.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+k.set("n", "<leader><leader>", t.buffers, { desc = "[ ] Find existing buffers" })
 
--- obsidian
+-- Obsidian
 k.set("n", "<leader>on", ":ObsidianNew", { desc = "New obsidian note" })
 k.set("n", "<leader>os", ":ObsidianSearch", { desc = "Search notes" })
 k.set("n", "<leader>ot", ":ObsidianTags", { desc = "List tags" })

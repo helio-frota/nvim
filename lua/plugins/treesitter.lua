@@ -1,7 +1,5 @@
--- Code Tree Support / Syntax Highlighting
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = "VeryLazy",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
@@ -11,7 +9,7 @@ return {
       enable = true,
     },
     indent = { enable = true },
-    auto_install = true, -- automatically install syntax support when entering new file type buffer
+    auto_install = true,
     ensure_installed = {
       "lua",
     },

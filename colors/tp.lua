@@ -131,4 +131,9 @@ vim.api.nvim_set_hl(0, "DDiagnosticUnderlineWarn", { fg = "#daa520" })
 vim.api.nvim_set_hl(0, "DDiagnosticUnderlineInfo", { fg = "#008000" })
 vim.api.nvim_set_hl(0, "DDiagnosticUnderlineHint", { fg = "#008000" })
 
--- vim.api.nvim_set_hl(0, "IlluminatedWordRead", { fg = "#ffffff", bg = "#0078d7" })
+-- mini statusline
+vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#fefefe", bg = "#465a7d" })
+vim.api.nvim_set_hl(0, "MiniStatuslineModeInsert", { fg = "#fefefe", bg = "#008000" })
+vim.api.nvim_set_hl(0, "MiniStatuslineModeVisual", { fg = "#fefefe", bg = "#0078d7" })
+vim.api.nvim_set_hl(0, "MiniStatuslineModeReplace", { fg = "#fefefe", bg = "#daa520" })
+vim.api.nvim_set_hl(0, "MiniStatuslineModeCommand", { fg = "#fefefe", bg = "#0000ff" })
