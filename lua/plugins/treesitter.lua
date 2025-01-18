@@ -4,18 +4,14 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
   build = ":TSUpdate",
-  opts = {
-    highlight = {
-      enable = true,
-    },
-    indent = { enable = true },
-    auto_install = true,
-    ensure_installed = {
-      "lua",
-    },
-  },
-  config = function(_, opts)
+  config = function()
     local configs = require "nvim-treesitter.configs"
-    configs.setup(opts)
+    configs.setup {
+      ensure_installed = { "lua", "vim", "vimdoc", "rust" },
+      sync_install = false,
+      highlight = { enable = true },
+      indent = { enable = true },
+      auto_install = true,
+    }
   end,
 }
