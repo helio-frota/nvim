@@ -14,7 +14,6 @@ k.set("n", "<up>", '<cmd>echo "Use k to move 󱗗"<CR>')
 k.set("n", "<down>", '<cmd>echo "Use j to move 󱗗"<CR>')
 
 -- Toggle
-k.set("n", "<C-n>", ":NvimTreeToggle<CR>")
 k.set("n", "<C-i>", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
@@ -35,10 +34,10 @@ k.set("n", "J", "mzJ`z")
 -- Leader ----------
 k.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 k.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame toggle" })
-k.set("n", "<leader>to", ":tabnew<CR>", { desc = "New tab" })
-k.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close tab" })
-k.set("n", "<leader>tn", ":tabn<CR>", { desc = "Next tab" })
-k.set("n", "<leader>tp", ":tabp<CR>", { desc = "Previous tab" })
+-- k.set("n", "<leader>to", ":tabnew<CR>", { desc = "New tab" })
+-- k.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close tab" })
+-- k.set("n", "<leader>tn", ":tabn<CR>", { desc = "Next tab" })
+-- k.set("n", "<leader>tp", ":tabp<CR>", { desc = "Previous tab" })
 k.set("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
 
 local t = require "telescope.builtin"
@@ -53,6 +52,12 @@ k.set("n", "<leader>sd", t.diagnostics, { desc = "[S]earch [D]iagnostics" })
 k.set("n", "<leader>sr", t.resume, { desc = "[S]earch [R]esume" })
 k.set("n", "<leader>s.", t.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 k.set("n", "<leader><leader>", t.buffers, { desc = "[ ] Find existing buffers" })
+
+local minifiles = require "mini.files"
+k.set("n", "<leader>e", function()
+  minifiles.open(vim.api.nvim_buf_get_name(0))
+  minifiles.reveal_cwd()
+end, { desc = "Open Mini Files" })
 
 -- Obsidian
 k.set("n", "<leader>on", ":ObsidianNew", { desc = "New obsidian note" })

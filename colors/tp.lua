@@ -57,33 +57,6 @@ hl("TelescopeTitle", nil, title, nil)
 hl("TelescopeSelection", selected_text, background, nil)
 hl("TelescopeBorder", nil, border, nil)
 
--- barbar
-hl("BufferCurrent", background, nil, nil)
-hl("BufferCurrentMod", background, nil, nil)
-hl("BufferCurrentIndex", background, nil, nil)
-hl("BufferCurrentSign", background, nil, nil)
-hl("BufferInactive", background, nil, nil)
-hl("BufferInactiveMod", background, nil, nil)
-hl("BufferInactiveIndex", background, nil, nil)
-hl("BufferInactiveSign", background, background, nil)
-hl("BufferVisible", background, nil, nil)
-hl("BufferVisibleMod", background, nil, nil)
-hl("BufferVisibleIndex", background, nil, nil)
-hl("BufferVisibleSign", background, nil, nil)
-hl("BufferAlternate", background, nil, nil)
-hl("BufferError", error, nil, nil)
-hl("BufferWarning", warning, nil, nil)
-hl("BufferTabpageFill", background, nil, nil)
-hl("BufferTabpages", background, nil, nil)
-
--- nvimtree
-hl("NvimTreeNormal", nil, text, nil)
-hl("NvimTreeFolderName", nil, folder_name, nil)
-hl("NvimTreeFolderIcon", nil, folder, nil)
-hl("NvimTreeOpenedFolderName", nil, folder_name, nil)
-hl("NvimTreeFileName", nil, text, nil)
-hl("NvimTreeWinSeparator", nil, border, nil)
-
 -- nvim-notify
 hl("NotifyINFOBorder", nil, border, nil)
 hl("NotifyWARNBorder", nil, border, nil)
