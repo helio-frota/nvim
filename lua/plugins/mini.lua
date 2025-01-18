@@ -9,6 +9,8 @@ return {
     require("mini.starter").setup()
     require("mini.tabline").setup()
     require("mini.files").setup()
+    require("mini.trailspace").setup()
+    require("mini.notify").setup()
     local statusline = require "mini.statusline"
     statusline.setup { use_icons = true }
     statusline.section_location = function()
