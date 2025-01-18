@@ -27,7 +27,7 @@ local folder_name = "#465a7d"
 local folder = "#465a7d"
 local title = "#99b4d1"
 local string_escape = "#465a7d"
-local background = "#f5f5f5"
+local background = "#fefefe"
 
 hl("Character", nil, chars_and_strings_2, nil)
 hl("IncSearch", match_search, nil, nil)

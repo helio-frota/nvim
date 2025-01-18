@@ -1,6 +1,7 @@
 return {
   "echasnovski/mini.nvim",
   config = function()
+    require("mini.cursorword").setup()
     require("mini.align").setup()
     local statusline = require "mini.statusline"
     statusline.setup { use_icons = true }
