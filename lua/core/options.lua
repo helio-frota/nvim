@@ -4,6 +4,7 @@ o.background = "light"
 o.backup = false
 o.breakindent = true
 o.clipboard = "unnamedplus"
+o.cmdheight = 0
 o.cursorline = true
 o.expandtab = true
 o.foldmethod = "manual"

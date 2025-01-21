@@ -33,11 +33,6 @@ k.set("n", "J", "mzJ`z")
 
 -- Leader ----------
 k.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-k.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame toggle" })
--- k.set("n", "<leader>to", ":tabnew<CR>", { desc = "New tab" })
--- k.set("n", "<leader>tx", ":tabclose<CR>", { desc = "Close tab" })
--- k.set("n", "<leader>tn", ":tabn<CR>", { desc = "Next tab" })
--- k.set("n", "<leader>tp", ":tabp<CR>", { desc = "Previous tab" })
 k.set("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
 
 local t = require "telescope.builtin"
