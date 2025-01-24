@@ -32,21 +32,21 @@ k.set("n", "<C-a>", "ggVG", { noremap = true })
 k.set("n", "J", "mzJ`z")
 
 -- Leader ----------
-k.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+k.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Quickfix diagnostic list" })
 k.set("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
 
 local t = require "telescope.builtin"
 
-k.set("n", "<leader>sh", t.help_tags, { desc = "[S]earch [H]elp" })
-k.set("n", "<leader>sk", t.keymaps, { desc = "[S]earch [K]eymaps" })
-k.set("n", "<leader>sf", t.find_files, { desc = "[S]earch [F]iles" })
-k.set("n", "<leader>ss", t.builtin, { desc = "[S]earch [S]elect Telescope" })
-k.set("n", "<leader>sw", t.grep_string, { desc = "[S]earch current [W]ord" })
-k.set("n", "<leader>sg", t.live_grep, { desc = "[S]earch by [G]rep" })
-k.set("n", "<leader>sd", t.diagnostics, { desc = "[S]earch [D]iagnostics" })
-k.set("n", "<leader>sr", t.resume, { desc = "[S]earch [R]esume" })
-k.set("n", "<leader>s.", t.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-k.set("n", "<leader><leader>", t.buffers, { desc = "[ ] Find existing buffers" })
+k.set("n", "<leader>sh", t.help_tags, { desc = "Search Help" })
+k.set("n", "<leader>sk", t.keymaps, { desc = "Search Keymaps" })
+k.set("n", "<leader>sf", t.find_files, { desc = "Search Files" })
+k.set("n", "<leader>ss", t.builtin, { desc = "Search Select Telescope" })
+k.set("n", "<leader>sw", t.grep_string, { desc = "Search current Word" })
+k.set("n", "<leader>sg", t.live_grep, { desc = "Search by Grep" })
+k.set("n", "<leader>sd", t.diagnostics, { desc = "Search Diagnostics" })
+k.set("n", "<leader>sr", t.resume, { desc = "Search Resume" })
+k.set("n", "<leader>s.", t.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
+k.set("n", "<leader><leader>", t.buffers, { desc = "Find existing buffers" })
 
 local minifiles = require "mini.files"
 k.set("n", "<leader>e", function()
@@ -70,14 +70,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
       mode = mode or "n"
       k.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
     end
-    map("gd", t.lsp_definitions, "[G]oto [D]efinition")
-    map("gr", t.lsp_references, "[G]oto [R]eferences")
-    map("gI", t.lsp_implementations, "[G]oto [I]mplementation")
-    map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-    map("<leader>D", t.lsp_type_definitions, "Type [D]efinition")
-    map("<leader>ds", t.lsp_document_symbols, "[D]ocument [S]ymbols")
-    map("<leader>ws", t.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-    map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-    map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+    map("gd", t.lsp_definitions, "Goto Definition")
+    map("gr", t.lsp_references, "Goto References")
+    map("gI", t.lsp_implementations, "Goto Implementation")
+    map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+    map("<leader>D", t.lsp_type_definitions, "Type Definition")
+    map("<leader>ds", t.lsp_document_symbols, "Document Symbols")
+    map("<leader>ws", t.lsp_dynamic_workspace_symbols, "Workspace Symbols")
+    map("<leader>rn", vim.lsp.buf.rename, "Rename")
+    map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
   end,
 })
