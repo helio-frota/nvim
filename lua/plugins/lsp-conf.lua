@@ -20,7 +20,16 @@ return {
     },
     lazy = false,
     config = function(_, opts)
-      require("lsp_lines").setup()
+      require("lsp_lines").setup {
+        box_drawing_characters = {
+          vertical = "|",
+          vertical_right = "+",
+          horizontal_up = "+",
+          cross = "+",
+          up_right = "+",
+          horizontal = "-",
+        },
+      }
 
       local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
       local diagnostic_signs = {}
