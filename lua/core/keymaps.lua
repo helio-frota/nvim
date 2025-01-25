@@ -18,6 +18,9 @@ k.set("n", "<C-i>", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 
+-- Buffer delete
+k.set("n", "<C-ESC>", ":bd<CR>")
+
 -- Copy, Paste, Undo, Redo, Select all, Join lines
 k.set("n", "<C-s>", ":write<CR>")
 k.set("v", "<C-c>", '"+y', { silent = true })
