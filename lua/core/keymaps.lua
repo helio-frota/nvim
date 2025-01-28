@@ -20,6 +20,8 @@ end)
 
 -- Buffer delete
 k.set("n", "<C-ESC>", ":bd<CR>")
+-- File delete
+k.set("n", "<S-Delete>", ":!rm %<CR>:bd!<CR>", { noremap = true, silent = true })
 
 -- Copy, Paste, Undo, Redo, Select all, Join lines
 k.set("n", "<C-s>", ":write<CR>")
