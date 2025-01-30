@@ -6,6 +6,7 @@ return {
     require("mini.cursorword").setup()
     require("mini.files").setup()
     require("mini.icons").setup()
+    require("mini.move").setup()
     require("mini.notify").setup()
     require("mini.pairs").setup()
     require("mini.starter").setup()
