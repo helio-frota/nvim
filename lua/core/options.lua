@@ -26,5 +26,6 @@ o.termguicolors = true
 o.timeoutlen = 300
 o.updatetime = 250
 o.wrap = false
+o.writebackup = false
 
 vim.lsp.inlay_hint.enable(false)
