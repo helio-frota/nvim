@@ -2,11 +2,9 @@ return {
   "echasnovski/mini.nvim",
   config = function()
     require("mini.align").setup()
-    -- require("mini.clue").setup()
     require("mini.comment").setup()
     require("mini.cursorword").setup()
     require("mini.files").setup()
-    -- require("mini.hipatterns").setup()
     require("mini.icons").setup()
     require("mini.notify").setup()
     require("mini.pairs").setup()
