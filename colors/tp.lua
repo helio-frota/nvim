@@ -8,20 +8,20 @@ local hl = function(group, bg, fg, attr)
 end
 
 local comments = "#008000"
-local info = "#008000"
+-- local info = "#008000"
 local selected_text = "#0078d7"
 local chars_and_strings = "#008080"
 local chars_and_strings_2 = "#007676"
 local numbers = "#AD4011"
 local brackets = "#ff0000"
-local error = "#ff0000"
+-- local error = "#ff0000"
 local cursor_line = "#fffbf0"
 local keywords1 = "#0000ff"
 local keywords2 = "#000080"
 local line_number = "#c0c0c0"
 local text = "#000000"
 local match_search = "#ffc832"
-local warning = "#daa520"
+-- local warning = "#daa520"
 local border = "#465a7d"
 local title = "#99b4d1"
 local string_escape = "#465a7d"
@@ -55,19 +55,6 @@ hl("TelescopeTitle", nil, title, nil)
 hl("TelescopeSelection", selected_text, background, nil)
 hl("TelescopeBorder", nil, border, nil)
 
--- nvim-notify
-hl("NotifyINFOBorder", nil, border, nil)
-hl("NotifyWARNBorder", nil, border, nil)
-hl("NotifyERRORBorder", nil, border, nil)
-hl("NotifyDEBUGBorder", nil, border, nil)
-hl("NotifyTRACEBorder", nil, border, nil)
-hl("NotifyINFOTitle", nil, info, nil)
-hl("NotifyINFOIcon", nil, info, nil)
-hl("NotifyERRORTitle", nil, error, nil)
-hl("NotifyERRORIcon", nil, error, nil)
-hl("NotifyWARNTitle", nil, warning, nil)
-hl("NotifyWARNIcon", nil, warning, nil)
-
 -- treesitter
 vim.api.nvim_set_hl(0, "@character", { link = "Character" })
 vim.api.nvim_set_hl(0, "@number", { link = "Number" })
@@ -84,9 +71,6 @@ vim.api.nvim_set_hl(0, "@type", { link = "Keyword2" })
 vim.api.nvim_set_hl(0, "@type.builtin", { link = "Keyword2" })
 vim.api.nvim_set_hl(0, "@attribute", { link = "Keyword" })
 vim.api.nvim_set_hl(0, "@variable.builtin", { link = "Keyword" })
-
--- noice
-vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { fg = "#465a7d", bg = "NONE" })
 
 -- diagnostics
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#ff0000" })
