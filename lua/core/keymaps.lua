@@ -59,30 +59,21 @@ k.set("n", "<leader>e", function()
   minifiles.reveal_cwd()
 end, { desc = "Open Mini Files" })
 
--- Obsidian
-k.set("n", "<leader>on", ":ObsidianNew", { desc = "New obsidian note" })
-k.set("n", "<leader>os", ":ObsidianSearch", { desc = "Search notes" })
-k.set("n", "<leader>ot", ":ObsidianTags", { desc = "List tags" })
-k.set("n", "<leader>oqs", ":ObsidianQuickSwitch", { desc = "Quick switch to other note" })
-k.set("n", "<leader>ont", ":ObsidianToday", { desc = "Today daily note" })
-k.set("n", "<leader>ony", ":ObsidianYesterday", { desc = "Yesterday daily note" })
-k.set("n", "<leader>ond", ":ObsidianDailies", { desc = "List daily notes" })
-
 -- LSP
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(event)
-    local map = function(keys, func, desc, mode)
-      mode = mode or "n"
-      k.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-    end
-    map("gd", t.lsp_definitions, "Goto Definition")
-    map("gr", t.lsp_references, "Goto References")
-    map("gI", t.lsp_implementations, "Goto Implementation")
-    map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-    map("<leader>D", t.lsp_type_definitions, "Type Definition")
-    map("<leader>ds", t.lsp_document_symbols, "Document Symbols")
-    map("<leader>ws", t.lsp_dynamic_workspace_symbols, "Workspace Symbols")
-    map("<leader>rn", vim.lsp.buf.rename, "Rename")
-    map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
-  end,
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   callback = function(event)
+--     local map = function(keys, func, desc, mode)
+--       mode = mode or "n"
+--       k.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+--     end
+--     map("gd", t.lsp_definitions, "Goto Definition")
+--     map("gr", t.lsp_references, "Goto References")
+--     map("gI", t.lsp_implementations, "Goto Implementation")
+--     map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+--     map("<leader>D", t.lsp_type_definitions, "Type Definition")
+--     map("<leader>ds", t.lsp_document_symbols, "Document Symbols")
+--     map("<leader>ws", t.lsp_dynamic_workspace_symbols, "Workspace Symbols")
+--     map("<leader>rn", vim.lsp.buf.rename, "Rename")
+--     map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
+--   end,
+-- })
