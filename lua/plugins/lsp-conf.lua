@@ -20,16 +20,16 @@ return {
     },
     lazy = false,
     config = function(_, opts)
-      require("lsp_lines").setup {
-        box_drawing_characters = {
-          vertical = "|",
-          vertical_right = "+",
-          horizontal_up = "+",
-          cross = "+",
-          up_right = "+",
-          horizontal = "-",
-        },
-      }
+      -- require("lsp_lines").setup {
+      --   box_drawing_characters = {
+      --     vertical = "|",
+      --     vertical_right = "+",
+      --     horizontal_up = "+",
+      --     cross = "+",
+      --     up_right = "+",
+      --     horizontal = "-",
+      --   },
+      -- }
 
       local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
       local diagnostic_signs = {}
@@ -40,9 +40,31 @@ return {
       vim.diagnostic.config {
         signs = { text = diagnostic_signs },
         virtual_text = false,
+        float = {
+          source = "always",
+          border = "rounded",
+        },
+        severity_sort = true,
+        virtual_lines = { highlight_whole_line = false },
       }
 
-      vim.diagnostic.config { virtual_lines = { highlight_whole_line = false } }
+      -- vim.diagnostic.config {
+      --   virtual_lines = true,
+      --   virtual_text = {
+      --     source = "always",
+      --     prefix = "■",
+      --   },
+      --   -- virtual_text = false,
+      --   float = {
+      --     source = "always",
+      --     border = "rounded",
+      --   },
+      --   signs = true,
+      --   underline = false,
+      --   update_in_insert = false,
+      --   severity_sort = true,
+      -- }
+
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require "lspconfig"
       lspconfig.lua_ls.setup {
@@ -66,16 +88,17 @@ return {
       server = {
         settings = {
           ["rust-analyzer"] = {
+            trace = { server = "verbose" },
             check = {
               command = "clippy",
               extraArgs = {
                 "--",
                 "-D",
                 "warnings",
-                -- "-D",
-                -- "clippy::unwrap_used",
-                -- "-D",
-                -- "clippy::expect_used",
+                "-D",
+                "clippy::unwrap_used",
+                "-D",
+                "clippy::expect_used",
                 "--no-deps",
               },
             },
