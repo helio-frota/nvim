@@ -43,6 +43,7 @@ k.set("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
 local t = require "telescope.builtin"
 
 k.set("n", "<leader>sh", t.help_tags, { desc = "Search Help" })
+k.set("n", "<leader>sc", t.git_bcommits, { desc = "Search git commits" })
 k.set("n", "<leader>sk", t.keymaps, { desc = "Search Keymaps" })
 k.set("n", "<leader>sf", t.find_files, { desc = "Search Files" })
 k.set("n", "<leader>ss", t.builtin, { desc = "Search Select Telescope" })
@@ -58,22 +59,3 @@ k.set("n", "<leader>e", function()
   minifiles.open(vim.api.nvim_buf_get_name(0))
   minifiles.reveal_cwd()
 end, { desc = "Open Mini Files" })
-
--- LSP
--- vim.api.nvim_create_autocmd("LspAttach", {
---   callback = function(event)
---     local map = function(keys, func, desc, mode)
---       mode = mode or "n"
---       k.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
---     end
---     map("gd", t.lsp_definitions, "Goto Definition")
---     map("gr", t.lsp_references, "Goto References")
---     map("gI", t.lsp_implementations, "Goto Implementation")
---     map("gD", vim.lsp.buf.declaration, "Goto Declaration")
---     map("<leader>D", t.lsp_type_definitions, "Type Definition")
---     map("<leader>ds", t.lsp_document_symbols, "Document Symbols")
---     map("<leader>ws", t.lsp_dynamic_workspace_symbols, "Workspace Symbols")
---     map("<leader>rn", vim.lsp.buf.rename, "Rename")
---     map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
---   end,
--- })
