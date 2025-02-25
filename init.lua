@@ -174,7 +174,6 @@ require("lazy").setup {
           end, { "i", "s" }),
         },
         sources = cmp.config.sources {
-
           {
             name = "nvim_lsp",
             entry_filter = function(entry, _)
@@ -189,7 +188,6 @@ require("lazy").setup {
             winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder",
           },
           completion = cmp.config.window.bordered {
-
             winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder",
           },
         },
@@ -284,14 +282,9 @@ require("lazy").setup {
   {
     "rust-lang/rust.vim",
     ft = { "rust" },
-    config = function()
-      -- vim.g.rustfmt_autosave = 1
-      -- vim.g.rustfmt_emit_files = 1
-      -- vim.g.rustfmt_fail_silently = 0
-      -- vim.g.rust_clip_command = 'wl-copy'
-    end,
+    config = function() end,
   },
-  -- rustaceanvim also works in this configuration
+  -- NOTE: switch to rustaceanvim in case any weird thing happen
   -- {
   --     "mrcjkb/rustaceanvim",
   --     lazy = false,
@@ -329,16 +322,6 @@ require("lazy").setup {
           enable = false,
         },
       }
-
-      local keymap = vim.keymap.set
-      keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "[LSP]Show docs" })
-      keymap("n", "<leader>lf", "<cmd>Lspsaga finder<CR>", { desc = "[LSP]Show refs" })
-      keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "[LSP]Code actions" })
-      keymap("v", "<leader>ca", "<cmd>Lspsaga range_code_action<CR>", { desc = "[LSP]Code actions (range)" })
-      keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "[LSP]Rename" })
-      keymap("n", "<leader>de", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "[LSP]Show diags" })
-      keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", { desc = "[LSP]Go to def" })
-      keymap("n", "gi", "<cmd>Lspsaga goto_implementation<CR>", { desc = "[LSP]Go to impl" })
     end,
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
@@ -352,6 +335,7 @@ require("lazy").setup {
       require("mini.comment").setup()
       require("mini.cursorword").setup()
       require("mini.files").setup()
+      require("mini.git").setup()
       require("mini.icons").setup()
       require("mini.move").setup()
       require("mini.notify").setup()
@@ -418,64 +402,64 @@ require("lazy").setup {
     },
   },
   --- git support TODO: review this
-  {
-    "lewis6991/gitsigns.nvim",
-    opts = {
-      on_attach = function(bufnr)
-        local gitsigns = require "gitsigns"
-
-        local function map(mode, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
-        end
-
-        map("n", "]c", function()
-          if vim.wo.diff then
-            vim.cmd.normal { "]c", bang = true }
-          else
-            gitsigns.nav_hunk "next"
-          end
-        end, { desc = "Jump to next git change" })
-
-        map("n", "[c", function()
-          if vim.wo.diff then
-            vim.cmd.normal { "[c", bang = true }
-          else
-            gitsigns.nav_hunk "prev"
-          end
-        end, { desc = "Jump to previous git change" })
-
-        map("v", "<leader>hs", function()
-          gitsigns.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
-        end, { desc = "git stage hunk" })
-        map("v", "<leader>hr", function()
-          gitsigns.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
-        end, { desc = "git reset hunk" })
-        map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "git stage hunk" })
-        map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "git reset hunk" })
-        map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "git Stage buffer" })
-        map("n", "<leader>hu", gitsigns.undo_stage_hunk, { desc = "git undo stage hunk" })
-        map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "git Reset buffer" })
-        map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "git preview hunk" })
-        map("n", "<leader>hb", gitsigns.blame_line, { desc = "git blame line" })
-        map("n", "<leader>hd", gitsigns.diffthis, { desc = "git diff against index" })
-        map("n", "<leader>hD", function()
-          gitsigns.diffthis "@"
-        end, { desc = "git diff against last commit" })
-        -- Toggles
-        map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "Toggle git blame" })
-        map("n", "<leader>tD", gitsigns.toggle_deleted, { desc = "Toggle git deleted" })
-      end,
-      signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
-      },
-    },
-  },
+  -- {
+  --   "lewis6991/gitsigns.nvim",
+  --   opts = {
+  --     on_attach = function(bufnr)
+  --       local gitsigns = require "gitsigns"
+  --
+  --       local function map(mode, l, r, opts)
+  --         opts = opts or {}
+  --         opts.buffer = bufnr
+  --         vim.keymap.set(mode, l, r, opts)
+  --       end
+  --
+  --       map("n", "]c", function()
+  --         if vim.wo.diff then
+  --           vim.cmd.normal { "]c", bang = true }
+  --         else
+  --           gitsigns.nav_hunk "next"
+  --         end
+  --       end, { desc = "Jump to next git change" })
+  --
+  --       map("n", "[c", function()
+  --         if vim.wo.diff then
+  --           vim.cmd.normal { "[c", bang = true }
+  --         else
+  --           gitsigns.nav_hunk "prev"
+  --         end
+  --       end, { desc = "Jump to previous git change" })
+  --
+  --       map("v", "<leader>hs", function()
+  --         gitsigns.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
+  --       end, { desc = "git stage hunk" })
+  --       map("v", "<leader>hr", function()
+  --         gitsigns.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
+  --       end, { desc = "git reset hunk" })
+  --       map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "git stage hunk" })
+  --       map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "git reset hunk" })
+  --       map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "git Stage buffer" })
+  --       map("n", "<leader>hu", gitsigns.undo_stage_hunk, { desc = "git undo stage hunk" })
+  --       map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "git Reset buffer" })
+  --       map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "git preview hunk" })
+  --       map("n", "<leader>hb", gitsigns.blame_line, { desc = "git blame line" })
+  --       map("n", "<leader>hd", gitsigns.diffthis, { desc = "git diff against index" })
+  --       map("n", "<leader>hD", function()
+  --         gitsigns.diffthis "@"
+  --       end, { desc = "git diff against last commit" })
+  --       -- Toggles
+  --       map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "Toggle git blame" })
+  --       map("n", "<leader>tD", gitsigns.toggle_deleted, { desc = "Toggle git deleted" })
+  --     end,
+  --     signs = { -- TODO: day to day only this part helps me, the signs. I'll remove this probably
+  --       add = { text = "+" },
+  --       change = { text = "~" },
+  --       delete = { text = "_" },
+  --       topdelete = { text = "‾" },
+  --       changedelete = { text = "~" },
+  --     },
+  --   },
+  -- },
   -- scroll bar
   {
     "dstein64/nvim-scrollview",
@@ -484,14 +468,7 @@ require("lazy").setup {
   {
     "saecki/crates.nvim",
     config = function()
-      require("crates").setup {
-        lsp = {
-          enabled = true,
-          actions = true,
-          completion = true,
-          hover = true,
-        },
-      }
+      require("crates").setup {}
     end,
   },
   -- hurl support
@@ -517,14 +494,14 @@ require("lazy").setup {
       },
     },
     keys = {
-      { "<leader>A", "<cmd>HurlRunner<CR>", desc = "Run All requests" },
-      { "<leader>a", "<cmd>HurlRunnerAt<CR>", desc = "Run Api request" },
-      { "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "Run Api request to entry" },
-      { "<leader>tE", "<cmd>HurlRunnerToEnd<CR>", desc = "Run Api request from current entry to end" },
-      { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "Hurl Toggle Mode" },
-      { "<leader>tv", "<cmd>HurlVerbose<CR>", desc = "Run Api in verbose mode" },
-      { "<leader>tV", "<cmd>HurlVeryVerbose<CR>", desc = "Run Api in very verbose mode" },
-      { "<leader>h", ":HurlRunner<CR>", desc = "Hurl Runner", mode = "v" },
+      { "<leader>A", "<cmd>HurlRunner<CR>", desc = "[HURL] Run All requests" },
+      { "<leader>a", "<cmd>HurlRunnerAt<CR>", desc = "[HURL] Run Api request" },
+      { "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "[HURL] Run Api request to entry" },
+      { "<leader>tE", "<cmd>HurlRunnerToEnd<CR>", desc = "[HURL] un Api request from current entry to end" },
+      { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "[HURL] Hurl Toggle Mode" },
+      { "<leader>tv", "<cmd>HurlVerbose<CR>", desc = "[HURL] Run Api in verbose mode" },
+      { "<leader>tV", "<cmd>HurlVeryVerbose<CR>", desc = "[HURL] Run Api in very verbose mode" },
+      { "<leader>h", ":HurlRunner<CR>", desc = "[HURL] Hurl Runner", mode = "v" },
     },
     config = function()
       require("hurl").setup {
@@ -597,6 +574,16 @@ k.set("n", "<leader>sr", t.resume, { desc = "Search Resume" })
 k.set("n", "<leader>s.", t.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
 k.set("n", "<leader><leader>", t.buffers, { desc = "Find existing buffers" })
 
+-- lsp saga
+k.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "[LSP]Show docs" })
+k.set("n", "<leader>lf", "<cmd>Lspsaga finder<CR>", { desc = "[LSP]Show refs" })
+k.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "[LSP]Code actions" })
+k.set("v", "<leader>ca", "<cmd>Lspsaga range_code_action<CR>", { desc = "[LSP]Code actions (range)" })
+k.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "[LSP]Rename" })
+k.set("n", "<leader>de", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "[LSP]Show diags" })
+k.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", { desc = "[LSP]Go to def" })
+k.set("n", "gi", "<cmd>Lspsaga goto_implementation<CR>", { desc = "[LSP]Go to impl" })
+
 local minifiles = require "mini.files"
 k.set("n", "<leader>e", function()
   minifiles.open(vim.api.nvim_buf_get_name(0))
@@ -605,7 +592,7 @@ end, { desc = "Open Mini Files" })
 
 k.set("n", "<leader>cf", function()
   local dir = vim.fn.expand "%:h"
-  local filename = vim.fn.input("New file: ", dir .. "/")
+  local filename = vim.fn.input("New buffer: ", dir .. "/")
   if filename ~= "" then
     vim.cmd("e " .. filename)
   end
