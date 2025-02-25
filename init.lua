@@ -334,6 +334,7 @@ require("lazy").setup {
       require("mini.align").setup()
       require("mini.comment").setup()
       require("mini.cursorword").setup()
+      require("mini.diff").setup()
       require("mini.files").setup()
       require("mini.git").setup()
       require("mini.icons").setup()
@@ -356,6 +357,14 @@ require("lazy").setup {
           todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
           note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
           hex_color = hipatterns.gen_highlighter.hex_color(),
+        },
+      }
+
+      local minidiff = require "mini.diff"
+      minidiff.setup {
+        view = {
+          style = "sign",
+          signs = { add = "+", change = "~", delete = "-" },
         },
       }
 
