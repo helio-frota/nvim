@@ -284,7 +284,12 @@ require("lazy").setup {
   {
     "rust-lang/rust.vim",
     ft = { "rust" },
-    config = function() end,
+    config = function()
+      -- vim.g.rustfmt_autosave = 1
+      -- vim.g.rustfmt_emit_files = 1
+      -- vim.g.rustfmt_fail_silently = 0
+      -- vim.g.rust_clip_command = 'wl-copy'
+    end,
   },
   -- rustaceanvim also works in this configuration
   -- {
@@ -597,3 +602,11 @@ k.set("n", "<leader>e", function()
   minifiles.open(vim.api.nvim_buf_get_name(0))
   minifiles.reveal_cwd()
 end, { desc = "Open Mini Files" })
+
+k.set("n", "<leader>cf", function()
+  local dir = vim.fn.expand "%:h"
+  local filename = vim.fn.input("New file: ", dir .. "/")
+  if filename ~= "" then
+    vim.cmd("e " .. filename)
+  end
+end, { desc = "New buffer here" })
