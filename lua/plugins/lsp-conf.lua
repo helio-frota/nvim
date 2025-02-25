@@ -88,7 +88,6 @@ return {
       server = {
         settings = {
           ["rust-analyzer"] = {
-            trace = { server = "verbose" },
             check = {
               command = "clippy",
               extraArgs = {
