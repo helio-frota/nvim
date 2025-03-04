@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 -- options
 local o = vim.opt
 
-o.background = "light"
+o.background = "dark"
 o.backup = false
 o.breakindent = true
 o.clipboard = "unnamedplus"
