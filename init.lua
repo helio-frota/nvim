@@ -1,11 +1,6 @@
 -- leader -> space
 vim.g.mapleader = " "
 
--- I created a minimal colorscheme based on old textpad inspired by
--- this work: https://github.com/damc-code/vscode-theme-geal
--- nvim automatically looks for a colorscheme in `colors` directory
-vim.cmd [[colorscheme tp]]
-
 -- options
 local o = vim.opt
 
