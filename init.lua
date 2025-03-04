@@ -211,9 +211,9 @@ require("lazy").setup {
   },
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    },
+    -- dependencies = {
+    --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    -- },
     lazy = false,
     config = function(_, opts)
       local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
@@ -465,6 +465,23 @@ require("lazy").setup {
   {
     "towolf/vim-helm",
   },
+  {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy",
+    opts = {
+      enabled = false,
+      message_template = " <author>-<summary>•<date>",
+      date_format = "%m-%d-%Y %H:%M:%S",
+      virtual_text_column = 1,
+    },
+  },
+  {
+    "dgagn/diagflow.nvim",
+    opts = {
+      show_borders = true,
+    },
+    -- event = "LspAttach",
+  },
 }
 
 -- keymaps
@@ -509,6 +526,7 @@ k.set("n", "J", "mzJ`z")
 -- Leader ----------
 k.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Quickfix diagnostic list" })
 k.set("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
+k.set("n", "<leader>tb", ":GitBlameToggle<CR>", { desc = "Toggle blame" })
 
 local t = require "telescope.builtin"
 
