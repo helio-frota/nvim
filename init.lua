@@ -211,9 +211,6 @@ require("lazy").setup {
   },
   {
     "neovim/nvim-lspconfig",
-    -- dependencies = {
-    --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    -- },
     lazy = false,
     config = function(_, opts)
       local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
