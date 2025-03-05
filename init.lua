@@ -208,14 +208,7 @@ require("lazy").setup {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function(_, opts)
-      local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
-      local diagnostic_signs = {}
-      for type, icon in pairs(signs) do
-        diagnostic_signs[vim.diagnostic.severity[type]] = icon
-      end
-
       vim.diagnostic.config {
-        signs = { text = diagnostic_signs },
         virtual_text = false,
         float = {
           source = "always",
@@ -389,6 +382,9 @@ require("lazy").setup {
           miniclue.gen_clues.windows(),
           miniclue.gen_clues.z(),
         },
+        window = {
+          config = { width = "auto", anchor = "SE", row = "auto", col = "auto" },
+        },
       }
     end,
   },
@@ -472,7 +468,6 @@ require("lazy").setup {
     opts = {
       show_borders = true,
     },
-    -- event = "LspAttach",
   },
 }
 
@@ -534,7 +529,7 @@ k.set("n", "<leader>sr", t.resume, { desc = "Search Resume" })
 k.set("n", "<leader>s.", t.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
 k.set("n", "<leader><leader>", t.buffers, { desc = "Find existing buffers" })
 
--- lsp saga
+-- LSP saga
 k.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "[LSP]Show docs" })
 k.set("n", "<leader>lf", "<cmd>Lspsaga finder<CR>", { desc = "[LSP]Show refs" })
 k.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "[LSP]Code actions" })
