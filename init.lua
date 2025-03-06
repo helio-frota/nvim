@@ -478,6 +478,7 @@ require("lazy").setup {
       show_borders = true,
     },
   },
+  { "akinsho/toggleterm.nvim", version = "*", config = true },
 }
 
 -- keymaps
@@ -505,6 +506,9 @@ end)
 k.set("n", "<C-ESC>", ":bd<CR>")
 -- File delete
 k.set("n", "<S-Delete>", ":!rm %<CR>:bd!<CR>", { noremap = true, silent = true })
+-- toggle term
+k.set("n", "<F2>", "<cmd>ToggleTerm direction=float<CR>")
+k.set("t", "<F2>", "<cmd>ToggleTerm direction=float<CR>")
 
 -- Copy, Paste, Undo, Redo, Select all, Join lines
 k.set("n", "<C-s>", ":write<CR>")
