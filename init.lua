@@ -599,8 +599,16 @@ vim.api.nvim_create_autocmd("FileType", {
     -- local NvimLightMagenta = "#FFCAFF"
     local NvimLightRed = "#FFC0B9"
     -- local NvimLightYellow = "#FCE094"
-
     hl("Number", nil, NvimLightRed, nil)
     hl("Comment", nil, nil, "italic")
   end,
 })
+
+k.set("n", "<F3>", function()
+  if vim.o.background == "dark" then
+    vim.o.background = "light"
+  else
+    vim.o.background = "dark"
+  end
+  vim.cmd "redraw"
+end, { desc = "Toggle dark and light" })
