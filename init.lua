@@ -49,44 +49,6 @@ end
 o.rtp:prepend(lazypath)
 
 require("lazy").setup {
-  performance = {
-    cache = {
-      enabled = true,
-    },
-    reset_packpath = true,
-    rtp = {
-      reset = true,
-      disabled_plugins = { -- not sure if that is true
-        "2html_plugin",
-        "bugreport",
-        "compiler",
-        "ftplugin",
-        "getscript",
-        "getscriptPlugin",
-        "gzip",
-        "logipat",
-        "matchit",
-        "netrw",
-        "netrwFileHandlers",
-        "netrwPlugin",
-        "netrwSettings",
-        "optwin",
-        "rplugin",
-        "rrhelper",
-        "spellfile_plugin",
-        "synmenu",
-        "syntax",
-        "tar",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "vimball",
-        "vimballPlugin",
-        "zip",
-        "zipPlugin",
-      },
-    },
-  },
   -- lua style
   {
     "wesleimp/stylua.nvim",
