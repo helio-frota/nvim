@@ -178,7 +178,6 @@ require("lazy").setup {
         virtual_text = false,
         float = {
           source = "always",
-          border = "rounded",
         },
         severity_sort = true,
         virtual_lines = { highlight_whole_line = false },
@@ -220,12 +219,6 @@ require("lazy").setup {
               },
             },
           },
-        },
-      }
-
-      opts.diagnostics = {
-        float = {
-          border = "rounded",
         },
       }
     end,
