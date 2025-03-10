@@ -173,7 +173,7 @@ require("lazy").setup {
   {
     "neovim/nvim-lspconfig",
     lazy = false,
-    config = function(_, opts)
+    config = function(_, _)
       vim.diagnostic.config {
         virtual_text = false,
         float = {
@@ -258,19 +258,22 @@ require("lazy").setup {
   --         },
   --     },
   -- },
-  -- {
-  --   "nvimdev/lspsaga.nvim",
-  --   config = function()
-  --     require("lspsaga").setup {
-  --       lightbulb = {
-  --         enable = false,
-  --       },
-  --     }
-  --   end,
-  --   dependencies = {
-  --     "nvim-treesitter/nvim-treesitter",
-  --   },
-  -- },
+  {
+    "nvimdev/lspsaga.nvim",
+    config = function()
+      require("lspsaga").setup {
+        symbol_in_winbar = {
+          enable = false,
+        },
+        lightbulb = {
+          enable = false,
+        },
+      }
+    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
   -- the awesome mini
   {
     "echasnovski/mini.nvim",
@@ -433,7 +436,6 @@ require("lazy").setup {
       show_borders = true,
     },
   },
-  { "akinsho/toggleterm.nvim", version = "*", config = true },
 }
 
 -- keymaps
@@ -462,8 +464,8 @@ k.set("n", "<C-ESC>", ":bd<CR>")
 -- File delete
 k.set("n", "<S-Delete>", ":!rm %<CR>:bd!<CR>", { noremap = true, silent = true })
 -- toggle term
-k.set("n", "<F2>", "<cmd>ToggleTerm direction=float<CR>")
-k.set("t", "<F2>", "<cmd>ToggleTerm direction=float<CR>")
+k.set("n", "<F2>", "<cmd>Lspsaga term_toggle<CR>")
+k.set("t", "<F2>", "<cmd>Lspsaga term_toggle<CR>")
 
 -- Copy, Paste, Undo, Redo, Select all, Join lines
 k.set("n", "<C-s>", ":write<CR>")
