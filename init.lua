@@ -176,9 +176,6 @@ require("lazy").setup {
     config = function(_, _)
       vim.diagnostic.config {
         virtual_text = false,
-        float = {
-          source = "always",
-        },
         severity_sort = true,
         virtual_lines = { highlight_whole_line = false },
       }
@@ -205,8 +202,54 @@ require("lazy").setup {
                 "--no-deps",
               },
             },
+            checkOnSave = {
+              command = "clippy",
+              extraArgs = {
+                "--",
+                "-D",
+                "warnings",
+                "-D",
+                "clippy::unwrap_used",
+                "-D",
+                "clippy::expect_used",
+                "--no-deps",
+              },
+            },
             cargo = {
               allFeatures = true,
+              buildScripts = {
+                enable = true,
+              },
+            },
+            lens = {
+              enable = true,
+            },
+            semanticHighlighting = {
+              enable = true,
+            },
+            cachePriming = {
+              enable = true,
+            },
+            hover = {
+              actions = {
+                enable = true,
+              },
+              documentation = {
+                enable = true,
+              },
+            },
+            inlayHints = {
+              enable = true,
+              typeHints = true,
+              parameterHints = true,
+            },
+            diagnostics = {
+              experimental = {
+                enable = true,
+              },
+            },
+            procMacro = {
+              enable = true,
             },
             imports = {
               group = {
@@ -369,6 +412,15 @@ require("lazy").setup {
   {
     "dstein64/nvim-scrollview",
   },
+  -- {
+  --     "ray-x/navigator.lua",
+  --     dependencies = {
+  --         "ray-x/guihua.lua",
+  --     },
+  --     config = function()
+  --         require("navigator").setup {}
+  --     end,
+  -- },
   -- crates support
   {
     "saecki/crates.nvim",
@@ -377,49 +429,49 @@ require("lazy").setup {
     end,
   },
   -- hurl support
-  {
-    "jellydn/hurl.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    ft = "hurl",
-    opts = {
-      debug = false,
-      show_notification = false,
-      mode = "split",
-      formatters = {
-        json = { "jq" },
-      },
-      mappings = {
-        close = "q",
-        next_panel = "<C-n>",
-        prev_panel = "<C-p>",
-      },
-    },
-    keys = {
-      { "<leader>A", "<cmd>HurlRunner<CR>", desc = "[HURL] Run All requests" },
-      { "<leader>a", "<cmd>HurlRunnerAt<CR>", desc = "[HURL] Run Api request" },
-      { "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "[HURL] Run Api request to entry" },
-      { "<leader>tE", "<cmd>HurlRunnerToEnd<CR>", desc = "[HURL] un Api request from current entry to end" },
-      { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "[HURL] Hurl Toggle Mode" },
-      { "<leader>tv", "<cmd>HurlVerbose<CR>", desc = "[HURL] Run Api in verbose mode" },
-      { "<leader>tV", "<cmd>HurlVeryVerbose<CR>", desc = "[HURL] Run Api in very verbose mode" },
-      { "<leader>h", ":HurlRunner<CR>", desc = "[HURL] Hurl Runner", mode = "v" },
-    },
-    config = function()
-      require("hurl").setup {
-        env_file = {
-          "hurl.env",
-        },
-      }
-    end,
-  },
+  -- {
+  --   "jellydn/hurl.nvim",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  --   ft = "hurl",
+  --   opts = {
+  --     debug = false,
+  --     show_notification = false,
+  --     mode = "split",
+  --     formatters = {
+  --       json = { "jq" },
+  --     },
+  --     mappings = {
+  --       close = "q",
+  --       next_panel = "<C-n>",
+  --       prev_panel = "<C-p>",
+  --     },
+  --   },
+  --   keys = {
+  --     { "<leader>A", "<cmd>HurlRunner<CR>", desc = "[HURL] Run All requests" },
+  --     { "<leader>a", "<cmd>HurlRunnerAt<CR>", desc = "[HURL] Run Api request" },
+  --     { "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "[HURL] Run Api request to entry" },
+  --     { "<leader>tE", "<cmd>HurlRunnerToEnd<CR>", desc = "[HURL] un Api request from current entry to end" },
+  --     { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "[HURL] Hurl Toggle Mode" },
+  --     { "<leader>tv", "<cmd>HurlVerbose<CR>", desc = "[HURL] Run Api in verbose mode" },
+  --     { "<leader>tV", "<cmd>HurlVeryVerbose<CR>", desc = "[HURL] Run Api in very verbose mode" },
+  --     { "<leader>h", ":HurlRunner<CR>", desc = "[HURL] Hurl Runner", mode = "v" },
+  --   },
+  --   config = function()
+  --     require("hurl").setup {
+  --       env_file = {
+  --         "hurl.env",
+  --       },
+  --     }
+  --   end,
+  -- },
   -- helm-chart template syntax support
-  {
-    "towolf/vim-helm",
-  },
+  -- {
+  --   "towolf/vim-helm",
+  -- },
   {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
