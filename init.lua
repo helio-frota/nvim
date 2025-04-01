@@ -4,7 +4,6 @@ vim.g.mapleader = " "
 -- options
 local o = vim.opt
 
-o.background = "dark"
 o.backup = false
 o.breakindent = true
 o.clipboard = "unnamedplus"
@@ -16,7 +15,6 @@ o.foldenable = false
 o.foldmethod = "manual"
 o.hlsearch = false
 o.ignorecase = true
-o.incsearch = true
 o.number = true
 o.scrolloff = 8
 o.shiftwidth = 4
@@ -28,7 +26,6 @@ o.spell = true
 o.spelllang = "en_us"
 o.swapfile = false
 o.tabstop = 4
-o.termguicolors = true
 o.timeoutlen = 300
 o.updatetime = 250
 o.wrap = false
