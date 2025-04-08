@@ -8,7 +8,6 @@ o.backup = false
 o.breakindent = true
 o.clipboard = "unnamedplus"
 o.conceallevel = 1
-o.cmdheight = 0
 o.cursorline = true
 o.expandtab = true
 o.foldenable = false
@@ -406,9 +405,9 @@ require("lazy").setup {
     },
   },
   -- scroll bar
-  {
-    "dstein64/nvim-scrollview",
-  },
+  -- {
+  --   "dstein64/nvim-scrollview",
+  -- },
   -- {
   --     "ray-x/navigator.lua",
   --     dependencies = {
