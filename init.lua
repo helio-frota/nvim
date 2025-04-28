@@ -1,12 +1,19 @@
 -- leader -> space
 vim.g.mapleader = " "
 
+-- I created a minimal colorscheme based on old textpad inspired by
+-- this work: https://github.com/damc-code/vscode-theme-geal
+-- nvim automatically looks for a colorscheme in `colors` directory
+vim.cmd [[colorscheme tp]]
+
 -- options
 local o = vim.opt
 
 o.backup = false
+o.background = "light"
 o.breakindent = true
 o.clipboard = "unnamedplus"
+o.cmdheight = 0
 o.conceallevel = 1
 o.cursorline = true
 o.expandtab = true
@@ -182,7 +189,101 @@ require("lazy").setup {
         capabilities = capabilities,
       }
 
-      lspconfig.rust_analyzer.setup {
+      -- lspconfig.rust_analyzer.setup {
+      --   settings = {
+      --     ["rust-analyzer"] = {
+      --       check = {
+      --         command = "clippy",
+      --         extraArgs = {
+      --           "--",
+      --           "-D",
+      --           "warnings",
+      --           "-D",
+      --           "clippy::unwrap_used",
+      --           "-D",
+      --           "clippy::expect_used",
+      --           "--no-deps",
+      --         },
+      --       },
+      --       checkOnSave = {
+      --         command = "clippy",
+      --         extraArgs = {
+      --           "--",
+      --           "-D",
+      --           "warnings",
+      --           "-D",
+      --           "clippy::unwrap_used",
+      --           "-D",
+      --           "clippy::expect_used",
+      --           "--no-deps",
+      --         },
+      --       },
+      --       cargo = {
+      --         allFeatures = true,
+      --         buildScripts = {
+      --           enable = true,
+      --         },
+      --       },
+      --       lens = {
+      --         enable = true,
+      --       },
+      --       semanticHighlighting = {
+      --         enable = true,
+      --       },
+      --       cachePriming = {
+      --         enable = true,
+      --       },
+      --       hover = {
+      --         actions = {
+      --           enable = true,
+      --         },
+      --         documentation = {
+      --           enable = true,
+      --         },
+      --       },
+      --       inlayHints = {
+      --         enable = true,
+      --         typeHints = true,
+      --         parameterHints = true,
+      --       },
+      --       diagnostics = {
+      --         experimental = {
+      --           enable = true,
+      --         },
+      --       },
+      --       procMacro = {
+      --         enable = true,
+      --       },
+      --       imports = {
+      --         group = {
+      --           enable = false,
+      --         },
+      --       },
+      --       completion = {
+      --         postfix = {
+      --           enable = false,
+      --         },
+      --       },
+      --     },
+      --   },
+      -- }
+    end,
+  },
+  -- {
+  --   "rust-lang/rust.vim",
+  --   ft = { "rust" },
+  --   config = function() end,
+  -- },
+  -- -- NOTE: switch to rustaceanvim in case any weird thing happen
+  {
+    "mrcjkb/rustaceanvim",
+    lazy = false,
+    ft = { "rust" },
+    config = function(_, opts)
+      vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
+    end,
+    opts = {
+      server = {
         settings = {
           ["rust-analyzer"] = {
             check = {
@@ -198,105 +299,11 @@ require("lazy").setup {
                 "--no-deps",
               },
             },
-            checkOnSave = {
-              command = "clippy",
-              extraArgs = {
-                "--",
-                "-D",
-                "warnings",
-                "-D",
-                "clippy::unwrap_used",
-                "-D",
-                "clippy::expect_used",
-                "--no-deps",
-              },
-            },
-            cargo = {
-              allFeatures = true,
-              buildScripts = {
-                enable = true,
-              },
-            },
-            lens = {
-              enable = true,
-            },
-            semanticHighlighting = {
-              enable = true,
-            },
-            cachePriming = {
-              enable = true,
-            },
-            hover = {
-              actions = {
-                enable = true,
-              },
-              documentation = {
-                enable = true,
-              },
-            },
-            inlayHints = {
-              enable = true,
-              typeHints = true,
-              parameterHints = true,
-            },
-            diagnostics = {
-              experimental = {
-                enable = true,
-              },
-            },
-            procMacro = {
-              enable = true,
-            },
-            imports = {
-              group = {
-                enable = false,
-              },
-            },
-            completion = {
-              postfix = {
-                enable = false,
-              },
-            },
           },
         },
-      }
-    end,
+      },
+    },
   },
-  {
-    "rust-lang/rust.vim",
-    ft = { "rust" },
-    config = function() end,
-  },
-  -- NOTE: switch to rustaceanvim in case any weird thing happen
-  -- {
-  --     "mrcjkb/rustaceanvim",
-  --     lazy = false,
-  --     ft = { "rust" },
-  --     config = function(_, opts)
-  --         vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
-  --     end,
-  --     opts = {
-  --         server = {
-  --             settings = {
-  --                 ["rust-analyzer"] = {
-  --                     check = {
-  --                         command = "clippy",
-  --                         extraArgs = {
-  --                             "--",
-  --                             "-D",
-  --                             "warnings",
-  --                             "-D",
-  --                             "clippy::unwrap_used",
-  --                             "-D",
-  --                             "clippy::expect_used",
-  --                             "--no-deps",
-  --                         },
-  --                     },
-  --                 },
-  --             },
-  --         },
-  --     },
-  -- },
   {
     "nvimdev/lspsaga.nvim",
     config = function()
@@ -608,12 +615,3 @@ vim.api.nvim_create_autocmd("FileType", {
     hl("Comment", nil, nil, "italic")
   end,
 })
-
-k.set("n", "<F3>", function()
-  if vim.o.background == "dark" then
-    vim.o.background = "light"
-  else
-    vim.o.background = "dark"
-  end
-  vim.cmd "redraw"
-end, { desc = "Toggle dark and light" })
