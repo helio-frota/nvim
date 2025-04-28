@@ -342,6 +342,9 @@ require("lazy").setup {
       require("mini.starter").setup()
       require("mini.tabline").setup()
       require("mini.trailspace").setup()
+
+      local misc = require "mini.misc"
+      misc.setup_termbg_sync()
       local statusline = require "mini.statusline"
       statusline.setup { use_icons = true }
       statusline.section_location = function()
@@ -578,40 +581,40 @@ k.set("n", "<leader>cf", function()
   end
 end, { desc = "New buffer here" })
 
--- customized default neovim theme for rust
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "rust",
-  callback = function()
-    local hl = function(group, bg, fg, attr)
-      fg = fg and "guifg=" .. fg or ""
-      bg = bg and "guibg=" .. bg or ""
-      attr = attr and "gui=" .. attr or ""
-      vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg .. " " .. attr)
-    end
+-- customized default neovim theme for rust - when I use the default theme
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "rust",
+--   callback = function()
+--     local hl = function(group, bg, fg, attr)
+--       fg = fg and "guifg=" .. fg or ""
+--       bg = bg and "guibg=" .. bg or ""
+--       attr = attr and "gui=" .. attr or ""
+--       vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg .. " " .. attr)
+--     end
 
-    -- https://github.com/nshern/neovim-default-colorscheme-extras?tab=readme-ov-file#neovim-default-colorscheme-extras
-    -- local NvimDarkBlue = "#004c63"
-    -- local NvimDarkCyan = "#007373"
-    -- local NvimDarkGreen = "#005523"
-    -- local NvimDarkGrey1 = "#07080D"
-    -- local NvimDarkGrey2 = "#14161B"
-    -- local NvimDarkGrey3 = "#2c2e33"
-    -- local NvimDarkGrey4 = "#4f5258"
-    -- local NvimDarkMagenta = "#470045"
-    -- local NvimDarkRed = "#590008"
-    -- local NvimDarkYellow = "#6b5300"
+-- https://github.com/nshern/neovim-default-colorscheme-extras?tab=readme-ov-file#neovim-default-colorscheme-extras
+-- local NvimDarkBlue = "#004c63"
+-- local NvimDarkCyan = "#007373"
+-- local NvimDarkGreen = "#005523"
+-- local NvimDarkGrey1 = "#07080D"
+-- local NvimDarkGrey2 = "#14161B"
+-- local NvimDarkGrey3 = "#2c2e33"
+-- local NvimDarkGrey4 = "#4f5258"
+-- local NvimDarkMagenta = "#470045"
+-- local NvimDarkRed = "#590008"
+-- local NvimDarkYellow = "#6b5300"
 
-    -- local NvimLightBlue = "#A6DBFF"
-    -- local NvimLightCyan = "#8cf8f7"
-    -- local NvimLightGreen = "#b4f6c0"
-    -- local NvimLightGrey1 = "#EEF1F8"
-    -- local NvimLightGrey2 = "#E0E2EA"
-    -- local NvimLightGrey3 = "#C4C6CD"
-    -- local NvimLightGrey4 = "#9b9ea4"
-    -- local NvimLightMagenta = "#FFCAFF"
-    local NvimLightRed = "#FFC0B9"
-    -- local NvimLightYellow = "#FCE094"
-    hl("Number", nil, NvimLightRed, nil)
-    hl("Comment", nil, nil, "italic")
-  end,
-})
+-- local NvimLightBlue = "#A6DBFF"
+-- local NvimLightCyan = "#8cf8f7"
+-- local NvimLightGreen = "#b4f6c0"
+-- local NvimLightGrey1 = "#EEF1F8"
+-- local NvimLightGrey2 = "#E0E2EA"
+-- local NvimLightGrey3 = "#C4C6CD"
+-- local NvimLightGrey4 = "#9b9ea4"
+-- local NvimLightMagenta = "#FFCAFF"
+--     local NvimLightRed = "#FFC0B9"
+--     -- local NvimLightYellow = "#FCE094"
+--     hl("Number", nil, NvimLightRed, nil)
+--     hl("Comment", nil, nil, "italic")
+--   end,
+-- })
