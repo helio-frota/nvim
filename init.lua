@@ -188,95 +188,11 @@ require("lazy").setup {
       lspconfig.lua_ls.setup {
         capabilities = capabilities,
       }
-
-      -- lspconfig.rust_analyzer.setup {
-      --   settings = {
-      --     ["rust-analyzer"] = {
-      --       check = {
-      --         command = "clippy",
-      --         extraArgs = {
-      --           "--",
-      --           "-D",
-      --           "warnings",
-      --           "-D",
-      --           "clippy::unwrap_used",
-      --           "-D",
-      --           "clippy::expect_used",
-      --           "--no-deps",
-      --         },
-      --       },
-      --       checkOnSave = {
-      --         command = "clippy",
-      --         extraArgs = {
-      --           "--",
-      --           "-D",
-      --           "warnings",
-      --           "-D",
-      --           "clippy::unwrap_used",
-      --           "-D",
-      --           "clippy::expect_used",
-      --           "--no-deps",
-      --         },
-      --       },
-      --       cargo = {
-      --         allFeatures = true,
-      --         buildScripts = {
-      --           enable = true,
-      --         },
-      --       },
-      --       lens = {
-      --         enable = true,
-      --       },
-      --       semanticHighlighting = {
-      --         enable = true,
-      --       },
-      --       cachePriming = {
-      --         enable = true,
-      --       },
-      --       hover = {
-      --         actions = {
-      --           enable = true,
-      --         },
-      --         documentation = {
-      --           enable = true,
-      --         },
-      --       },
-      --       inlayHints = {
-      --         enable = true,
-      --         typeHints = true,
-      --         parameterHints = true,
-      --       },
-      --       diagnostics = {
-      --         experimental = {
-      --           enable = true,
-      --         },
-      --       },
-      --       procMacro = {
-      --         enable = true,
-      --       },
-      --       imports = {
-      --         group = {
-      --           enable = false,
-      --         },
-      --       },
-      --       completion = {
-      --         postfix = {
-      --           enable = false,
-      --         },
-      --       },
-      --     },
-      --   },
-      -- }
     end,
   },
-  -- {
-  --   "rust-lang/rust.vim",
-  --   ft = { "rust" },
-  --   config = function() end,
-  -- },
-  -- -- NOTE: switch to rustaceanvim in case any weird thing happen
   {
     "mrcjkb/rustaceanvim",
+    version = "^6",
     lazy = false,
     ft = { "rust" },
     config = function(_, opts)
