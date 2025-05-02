@@ -8,7 +8,6 @@ vim.cmd [[colorscheme tp]]
 
 -- options
 local o = vim.opt
-
 o.backup = false
 o.background = "light"
 o.breakindent = true
@@ -97,66 +96,21 @@ require("lazy").setup {
   },
   -- the completion
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
+    "saghen/blink.cmp",
+    version = "1.*",
+    opts = {
+      keymap = {
+        preset = "default",
+        ["<CR>"] = { "accept", "fallback" },
+        ["<C><leader>"] = { "show" },
+      },
+      completion = { documentation = { auto_show = true } },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
     },
-    config = function()
-      local cmp = require "cmp"
-
-      cmp.setup {
-        completion = {
-          completeopt = "menu,menuone,noinsert",
-        },
-        mapping = cmp.mapping.preset.insert {
-          ["<C-j>"] = cmp.mapping.select_next_item(),
-          ["<C-k>"] = cmp.mapping.select_prev_item(),
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete {},
-          ["<CR>"] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          },
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        },
-        sources = cmp.config.sources {
-          {
-            name = "nvim_lsp",
-            entry_filter = function(entry, _)
-              return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
-            end,
-          },
-          { name = "buffer" },
-          { name = "path" },
-        },
-        window = {
-          documentation = cmp.config.window.bordered {
-            winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder",
-          },
-          completion = cmp.config.window.bordered {
-            winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder",
-          },
-        },
-      }
-    end,
+    opts_extend = { "sources.default" },
   },
   -- LSP stuff
   {
@@ -178,16 +132,17 @@ require("lazy").setup {
     lazy = false,
     config = function(_, _)
       vim.diagnostic.config {
-        virtual_text = false,
+        -- virtual_text = true,
+        virtual_lines = true,
         severity_sort = true,
-        virtual_lines = { highlight_whole_line = false },
+        -- virtual_lines = { highlight_whole_line = false },
       }
 
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local lspconfig = require "lspconfig"
-      lspconfig.lua_ls.setup {
-        capabilities = capabilities,
-      }
+      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      -- local lspconfig = require "lspconfig"
+      -- lspconfig.lua_ls.setup {
+      --   capabilities = capabilities,
+      -- }
     end,
   },
   {
@@ -202,6 +157,15 @@ require("lazy").setup {
       server = {
         settings = {
           ["rust-analyzer"] = {
+            files = {
+              exclude = {
+                "target",
+                ".git",
+              },
+            },
+            procMacro = {
+              enable = false,
+            },
             check = {
               command = "clippy",
               extraArgs = {
