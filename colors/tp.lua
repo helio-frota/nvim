@@ -72,20 +72,6 @@ vim.api.nvim_set_hl(0, "@type.builtin", { link = "Keyword2" })
 vim.api.nvim_set_hl(0, "@attribute", { link = "Keyword" })
 vim.api.nvim_set_hl(0, "@variable.builtin", { link = "Keyword" })
 
--- diagnostics
-vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#ff0000" })
-vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#daa520" })
-vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#008000" })
-vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#008000" })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#ff0000" })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#daa520" })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#008000" })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#008000" })
-vim.api.nvim_set_hl(0, "DDiagnosticUnderlineError", { fg = "#ff0000" })
-vim.api.nvim_set_hl(0, "DDiagnosticUnderlineWarn", { fg = "#daa520" })
-vim.api.nvim_set_hl(0, "DDiagnosticUnderlineInfo", { fg = "#008000" })
-vim.api.nvim_set_hl(0, "DDiagnosticUnderlineHint", { fg = "#008000" })
-
 -- mini statusline
 vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#fefefe", bg = "#465a7d" })
 vim.api.nvim_set_hl(0, "MiniStatuslineModeInsert", { fg = "#fefefe", bg = "#008000" })

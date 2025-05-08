@@ -280,26 +280,6 @@ require("lazy").setup {
       require("crates").setup {}
     end,
   },
-  -- {
-  --   "cordx56/rustowl",
-  --   version = "*",
-  --   build = "cargo binstall rustowl",
-  --   run = "rustowl",
-  --   config = function()
-  --     local lspconfig = require "lspconfig"
-  --     lspconfig.config.rustowl.setup {}
-  --   end,
-  --   lazy = false,
-  --   opts = {
-  --     client = {
-  --       on_attach = function(_, buffer)
-  --         vim.keymap.set("n", "<leader>to", function()
-  --           require("rustowl").toggle(buffer)
-  --         end, { buffer = buffer, desc = "Toggle RustOwl" })
-  --       end,
-  --     },
-  --   },
-  -- },
   -- hurl support
   {
     "jellydn/hurl.nvim",
