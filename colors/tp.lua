@@ -8,13 +8,11 @@ local hl = function(group, bg, fg, attr)
 end
 
 local comments = "#008000"
--- local info = "#008000"
 local selected_text = "#0078d7"
 local chars_and_strings = "#008080"
 local chars_and_strings_2 = "#007676"
 local numbers = "#AD4011"
 local brackets = "#ff0000"
--- local error = "#ff0000"
 local cursor_line = "#fffbf0"
 local keywords1 = "#0000ff"
 local keywords2 = "#000080"
@@ -37,13 +35,14 @@ hl("Function", nil, keywords2, nil)
 hl("FunctionBuiltin", nil, keywords2, nil)
 hl("FunctionMacro", nil, keywords2, nil)
 hl("PunctBracket", nil, brackets, nil)
-hl("Keyword", nil, keywords1, nil)
-hl("Keyword2", nil, keywords2, nil)
+hl("Keyword", nil, keywords1, "bold")
+hl("Keyword2", nil, keywords2, "bold")
 hl("LineNr", nil, line_number, nil)
 hl("Number", nil, numbers, nil)
 hl("Boolean", nil, numbers, nil)
 hl("Normal", background, text, nil)
 hl("Visual", selected_text, background, nil)
+hl("@operator", nil, keywords1, "bold")
 
 vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
 
