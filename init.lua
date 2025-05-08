@@ -51,31 +51,18 @@ end
 o.rtp:prepend(lazypath)
 
 require("lazy").setup {
-  -- lua style
-  {
-    "wesleimp/stylua.nvim",
-  },
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
+    opts = {
+      ensure_installed = { "lua" },
+      sync_install = false,
+      highlight = { enable = true },
+      indent = { enable = true },
+      auto_install = true,
     },
-    build = ":TSUpdate",
-    config = function()
-      local configs = require "nvim-treesitter.configs"
-      configs.setup {
-        ensure_installed = { "lua", "rust" },
-        sync_install = false,
-        highlight = { enable = true },
-        indent = { enable = true },
-        auto_install = true,
-      }
-      require("vim.treesitter.query").set(
-        "markdown",
-        "highlights",
-        "(fenced_code_block_delimiter) @punctuation.bracket"
-      )
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
     end,
   },
   -- the format
@@ -114,13 +101,13 @@ require("lazy").setup {
   },
   -- LSP stuff
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     config = function()
       require("mason").setup()
     end,
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup {
         ensure_installed = { "lua_ls", "taplo" },
@@ -132,17 +119,9 @@ require("lazy").setup {
     lazy = false,
     config = function(_, _)
       vim.diagnostic.config {
-        -- virtual_text = true,
         virtual_lines = true,
         severity_sort = true,
-        -- virtual_lines = { highlight_whole_line = false },
       }
-
-      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      -- local lspconfig = require "lspconfig"
-      -- lspconfig.lua_ls.setup {
-      --   capabilities = capabilities,
-      -- }
     end,
   },
   {
@@ -164,7 +143,7 @@ require("lazy").setup {
               },
             },
             procMacro = {
-              enable = false,
+              enable = true,
             },
             check = {
               command = "clippy",
@@ -301,6 +280,26 @@ require("lazy").setup {
       require("crates").setup {}
     end,
   },
+  -- {
+  --   "cordx56/rustowl",
+  --   version = "*",
+  --   build = "cargo binstall rustowl",
+  --   run = "rustowl",
+  --   config = function()
+  --     local lspconfig = require "lspconfig"
+  --     lspconfig.config.rustowl.setup {}
+  --   end,
+  --   lazy = false,
+  --   opts = {
+  --     client = {
+  --       on_attach = function(_, buffer)
+  --         vim.keymap.set("n", "<leader>to", function()
+  --           require("rustowl").toggle(buffer)
+  --         end, { buffer = buffer, desc = "Toggle RustOwl" })
+  --       end,
+  --     },
+  --   },
+  -- },
   -- hurl support
   {
     "jellydn/hurl.nvim",
@@ -327,7 +326,7 @@ require("lazy").setup {
       { "<leader>A", "<cmd>HurlRunner<CR>", desc = "[HURL] Run All requests" },
       { "<leader>a", "<cmd>HurlRunnerAt<CR>", desc = "[HURL] Run Api request" },
       { "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "[HURL] Run Api request to entry" },
-      { "<leader>tE", "<cmd>HurlRunnerToEnd<CR>", desc = "[HURL] un Api request from current entry to end" },
+      { "<leader>tE", "<cmd>HurlRunnerToEnd<CR>", desc = "[HURL] Run Api request from current entry to end" },
       { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "[HURL] Hurl Toggle Mode" },
       { "<leader>tv", "<cmd>HurlVerbose<CR>", desc = "[HURL] Run Api in verbose mode" },
       { "<leader>tV", "<cmd>HurlVeryVerbose<CR>", desc = "[HURL] Run Api in very verbose mode" },
@@ -353,12 +352,6 @@ require("lazy").setup {
       message_template = " <author>-<summary>•<date>",
       date_format = "%m-%d-%Y %H:%M:%S",
       virtual_text_column = 1,
-    },
-  },
-  {
-    "dgagn/diagflow.nvim",
-    opts = {
-      show_borders = true,
     },
   },
 }
@@ -413,16 +406,14 @@ k.set("n", "<leader>tb", ":GitBlameToggle<CR>", { desc = "Toggle blame" })
 local t = require "telescope.builtin"
 
 k.set("n", "<leader>sh", t.help_tags, { desc = "Search Help" })
-k.set("n", "<leader>sc", t.git_bcommits, { desc = "Search git commits" })
 k.set("n", "<leader>sk", t.keymaps, { desc = "Search Keymaps" })
 k.set("n", "<leader>sf", t.find_files, { desc = "Search Files" })
 k.set("n", "<leader>ss", t.builtin, { desc = "Search Select Telescope" })
 k.set("n", "<leader>sw", t.grep_string, { desc = "Search current Word" })
 k.set("n", "<leader>sg", t.live_grep, { desc = "Search by Grep" })
-k.set("n", "<leader>sd", t.diagnostics, { desc = "Search Diagnostics" })
-k.set("n", "<leader>sr", t.resume, { desc = "Search Resume" })
-k.set("n", "<leader>s.", t.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
-k.set("n", "<leader><leader>", t.buffers, { desc = "Find existing buffers" })
+k.set("n", "<leader>sd", t.diagnostics, { desc = "Search diagnostics" })
+k.set("n", "<leader>sr", t.resume, { desc = "Search resume" })
+k.set("n", "<leader>s.", t.oldfiles, { desc = "Recent files" })
 
 -- LSP saga
 k.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "[LSP]Show docs" })
