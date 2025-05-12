@@ -11,18 +11,16 @@ local comments = "#008000"
 local selected_text = "#0078d7"
 local chars_and_strings = "#008080"
 local chars_and_strings_2 = "#007676"
-local numbers = "#AD4011"
+local numbers = "#ad4011"
 local brackets = "#ff0000"
 local cursor_line = "#fffbf0"
 local keywords1 = "#0000ff"
 local keywords2 = "#000080"
-local line_number = "#c0c0c0"
+local line_number = "#d0d0d0"
 local text = "#000000"
 local match_search = "#ffc832"
--- local warning = "#daa520"
 local border = "#465a7d"
 local title = "#99b4d1"
-local string_escape = "#465a7d"
 local background = "#fefefe"
 
 hl("Character", nil, chars_and_strings_2, nil)
@@ -30,19 +28,19 @@ hl("IncSearch", match_search, nil, nil)
 hl("Comment", nil, comments, "italic")
 hl("CursorLine", cursor_line, nil, nil)
 hl("String", nil, chars_and_strings, nil)
-hl("StringEscape", nil, string_escape, nil)
+hl("StringEscape", nil, brackets, nil)
 hl("Function", nil, keywords2, nil)
 hl("FunctionBuiltin", nil, keywords2, nil)
 hl("FunctionMacro", nil, keywords2, nil)
 hl("PunctBracket", nil, brackets, nil)
-hl("Keyword", nil, keywords1, "bold")
-hl("Keyword2", nil, keywords2, "bold")
+hl("Keyword", nil, keywords1, nil)
+hl("Keyword2", nil, keywords2, nil)
 hl("LineNr", nil, line_number, nil)
 hl("Number", nil, numbers, nil)
 hl("Boolean", nil, numbers, nil)
 hl("Normal", background, text, nil)
 hl("Visual", selected_text, background, nil)
-hl("@operator", nil, keywords1, "bold")
+-- hl("@operator", nil, keywords1, "bold")
 
 vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
 

@@ -81,6 +81,11 @@ require("lazy").setup {
       }
     end,
   },
+  {
+    "Fildo7525/pretty_hover",
+    event = "LspAttach",
+    opts = {},
+  },
   -- the completion
   {
     "saghen/blink.cmp",
@@ -91,7 +96,11 @@ require("lazy").setup {
         ["<CR>"] = { "accept", "fallback" },
         ["<C><leader>"] = { "show" },
       },
-      completion = { documentation = { auto_show = true } },
+      completion = {
+        documentation = {
+          auto_show = true,
+        },
+      },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
       },
@@ -161,22 +170,6 @@ require("lazy").setup {
           },
         },
       },
-    },
-  },
-  {
-    "nvimdev/lspsaga.nvim",
-    config = function()
-      require("lspsaga").setup {
-        symbol_in_winbar = {
-          enable = false,
-        },
-        lightbulb = {
-          enable = false,
-        },
-      }
-    end,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
     },
   },
   -- the awesome mini
@@ -361,9 +354,10 @@ end)
 k.set("n", "<C-ESC>", ":bd<CR>")
 -- File delete
 k.set("n", "<S-Delete>", ":!rm %<CR>:bd!<CR>", { noremap = true, silent = true })
--- toggle term
-k.set("n", "<F2>", "<cmd>Lspsaga term_toggle<CR>")
-k.set("t", "<F2>", "<cmd>Lspsaga term_toggle<CR>")
+-- Open nvim terminal
+k.set("n", "<F2>", function()
+  vim.cmd "botright split term://$SHELL"
+end, { desc = "Terminal" })
 
 -- Copy, Paste, Undo, Redo, Select all, Join lines
 k.set("n", "<C-s>", ":write<CR>")
@@ -385,25 +379,37 @@ k.set("n", "<leader>tb", ":GitBlameToggle<CR>", { desc = "Toggle blame" })
 
 local t = require "telescope.builtin"
 
-k.set("n", "<leader>sh", t.help_tags, { desc = "Search Help" })
-k.set("n", "<leader>sk", t.keymaps, { desc = "Search Keymaps" })
-k.set("n", "<leader>sf", t.find_files, { desc = "Search Files" })
-k.set("n", "<leader>ss", t.builtin, { desc = "Search Select Telescope" })
+k.set("n", "<leader>sk", t.keymaps, { desc = "Search keymaps" })
+k.set("n", "<leader>sf", t.find_files, { desc = "Search files" })
 k.set("n", "<leader>sw", t.grep_string, { desc = "Search current Word" })
-k.set("n", "<leader>sg", t.live_grep, { desc = "Search by Grep" })
+k.set("n", "<leader>sg", t.live_grep, { desc = "Search by grep" })
 k.set("n", "<leader>sd", t.diagnostics, { desc = "Search diagnostics" })
-k.set("n", "<leader>sr", t.resume, { desc = "Search resume" })
 k.set("n", "<leader>s.", t.oldfiles, { desc = "Recent files" })
 
--- LSP saga
-k.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "[LSP]Show docs" })
-k.set("n", "<leader>lf", "<cmd>Lspsaga finder<CR>", { desc = "[LSP]Show refs" })
-k.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "[LSP]Code actions" })
-k.set("v", "<leader>ca", "<cmd>Lspsaga range_code_action<CR>", { desc = "[LSP]Code actions (range)" })
-k.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "[LSP]Rename" })
-k.set("n", "<leader>de", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "[LSP]Show diags" })
-k.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", { desc = "[LSP]Go to def" })
-k.set("n", "gi", "<cmd>Lspsaga goto_implementation<CR>", { desc = "[LSP]Go to impl" })
+local ho = require "pretty_hover"
+k.set("n", "K", function()
+  ho.hover()
+end, { desc = "[LSP]Show docs" })
+
+k.set("n", "<leader>lf", function()
+  t.lsp_references {
+    fname_width = 60,
+  }
+end, { desc = "[LSP]Show refs" })
+
+k.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "[LSP] Code actions" })
+
+k.set("n", "<leader>rn", function()
+  vim.lsp.buf.rename()
+end, { desc = "[LSP]Rename" })
+
+k.set("n", "gd", function()
+  vim.lsp.buf.definition()
+end, { desc = "[LSP]Go to def" })
+
+vim.keymap.set("n", "gi", function()
+  vim.lsp.buf.implementations()
+end, { desc = "[LSP]Go to Implementation" })
 
 local minifiles = require "mini.files"
 k.set("n", "<leader>e", function()
