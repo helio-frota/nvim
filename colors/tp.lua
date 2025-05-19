@@ -1,5 +1,7 @@
 vim.cmd [[highlight clear]]
 
+-- I created a minimal colorscheme based on old textpad inspired by
+-- this work: https://github.com/damc-code/vscode-theme-geal
 local hl = function(group, bg, fg, attr)
   fg = fg and "guifg=" .. fg or ""
   bg = bg and "guibg=" .. bg or ""
@@ -18,9 +20,9 @@ local keywords1 = "#0000ff"
 local keywords2 = "#000080"
 local line_number = "#d0d0d0"
 local text = "#000000"
-local match_search = "#ffc832"
+local match_search = "#e6ac00"
 local border = "#465a7d"
-local title = "#99b4d1"
+local title = "#5c9bd5"
 local background = "#fefefe"
 
 hl("Character", nil, chars_and_strings_2, nil)

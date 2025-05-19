@@ -1,9 +1,6 @@
 -- leader -> space
 vim.g.mapleader = " "
 
--- I created a minimal colorscheme based on old textpad inspired by
--- this work: https://github.com/damc-code/vscode-theme-geal
--- nvim automatically looks for a colorscheme in `colors` directory
 vim.cmd [[colorscheme tp]]
 
 -- options
@@ -147,7 +144,7 @@ require("lazy").setup {
           ["rust-analyzer"] = {
             files = {
               exclude = {
-                "target",
+                "target/",
                 ".git",
               },
             },
@@ -327,6 +324,18 @@ require("lazy").setup {
       virtual_text_column = 1,
     },
   },
+  {
+    "kndndrj/nvim-dbee",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    build = function()
+      require("dbee").install()
+    end,
+    config = function()
+      require("dbee").setup(--[[optional config]])
+    end,
+  },
 }
 
 -- keymaps
@@ -385,6 +394,11 @@ k.set("n", "<leader>sw", t.grep_string, { desc = "Search current Word" })
 k.set("n", "<leader>sg", t.live_grep, { desc = "Search by grep" })
 k.set("n", "<leader>sd", t.diagnostics, { desc = "Search diagnostics" })
 k.set("n", "<leader>s.", t.oldfiles, { desc = "Recent files" })
+
+local dbee = require "dbee"
+k.set("n", "<leader>db", function()
+  dbee.toggle()
+end, { desc = "[DB] Toggle" })
 
 local ho = require "pretty_hover"
 k.set("n", "K", function()
