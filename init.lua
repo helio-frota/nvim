@@ -140,6 +140,7 @@ require("lazy").setup {
     opts = {
       server = {
         settings = {
+          standalone = false,
           ["rust-analyzer"] = {
             files = {
               exclude = {
@@ -161,6 +162,12 @@ require("lazy").setup {
                 "-D",
                 "clippy::expect_used",
                 "--no-deps",
+              },
+            },
+            inlayHints = {
+              lifetimeElisionHints = {
+                enable = true,
+                useParameterNames = true,
               },
             },
           },
@@ -310,9 +317,9 @@ require("lazy").setup {
     end,
   },
   -- helm-chart template syntax support
-  -- {
-  --   "towolf/vim-helm",
-  -- },
+  {
+    "towolf/vim-helm",
+  },
   {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
@@ -322,18 +329,6 @@ require("lazy").setup {
       date_format = "%m-%d-%Y %H:%M:%S",
       virtual_text_column = 1,
     },
-  },
-  {
-    "kndndrj/nvim-dbee",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
-    build = function()
-      require("dbee").install()
-    end,
-    config = function()
-      require("dbee").setup(--[[optional config]])
-    end,
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
@@ -425,11 +420,6 @@ k.set("n", "<leader>sg", t.live_grep, { desc = "Search by grep" })
 k.set("n", "<leader>sd", t.diagnostics, { desc = "Search diagnostics" })
 k.set("n", "<leader>s.", t.oldfiles, { desc = "Recent files" })
 
-local dbee = require "dbee"
-k.set("n", "<leader>db", function()
-  dbee.toggle()
-end, { desc = "[DB] Toggle" })
-
 local ho = require "pretty_hover"
 k.set("n", "K", function()
   ho.hover()
@@ -468,3 +458,11 @@ k.set("n", "<leader>cf", function()
     vim.cmd("e " .. filename)
   end
 end, { desc = "New buffer here" })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    if package.loaded["mini.trailspace"] then
+      require("mini.trailspace").trim()
+    end
+  end,
+})
