@@ -5,10 +5,14 @@ vim.cmd [[colorscheme tp]]
 
 -- options
 local o = vim.opt
-o.backup = false
+o.autoread = true
+o.autowrite = false
 o.background = "light"
+o.backup = false
+o.backspace = "indent,eol,start"
 o.breakindent = true
 o.clipboard = "unnamedplus"
+o.completeopt = "menuone,noinsert,noselect"
 o.cmdheight = 0
 o.conceallevel = 1
 o.cursorline = true
@@ -28,8 +32,10 @@ o.spell = true
 o.spelllang = "en_us"
 o.swapfile = false
 o.tabstop = 4
-o.timeoutlen = 300
-o.updatetime = 250
+o.timeoutlen = 500
+o.ttimeoutlen = 0
+o.undofile = false
+o.updatetime = 300
 o.wrap = false
 o.writebackup = false
 
@@ -108,7 +114,9 @@ require("lazy").setup {
   {
     "mason-org/mason.nvim",
     config = function()
-      require("mason").setup()
+      require("mason").setup {
+        PATH = "append",
+      }
     end,
   },
   {
@@ -378,6 +386,9 @@ k.set("n", "<left>", '<cmd>echo "Use h to move 󱗗"<CR>')
 k.set("n", "<right>", '<cmd>echo "Use l to move 󱗗"<CR>')
 k.set("n", "<up>", '<cmd>echo "Use k to move 󱗗"<CR>')
 k.set("n", "<down>", '<cmd>echo "Use j to move 󱗗"<CR>')
+
+k.set("v", "<", "<gv", { desc = "Indent left" })
+k.set("v", ">", ">gv", { desc = "Indent right" })
 
 -- Toggle
 k.set("n", "<C-i>", function()
