@@ -6,7 +6,7 @@ vim.cmd [[
   hi DiagnosticUnderlineWarning guisp=#F6EBBC gui=undercurl
 ]]
 
--- minimal colorscheme based on old Eclipse IDE 2.1
+-- minimal colorscheme based on Intellij IDEA 11.1.5
 
 local attribute = "#808000"
 local comment = "#808080"

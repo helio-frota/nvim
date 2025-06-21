@@ -6,7 +6,7 @@ vim.cmd [[
   hi DiagnosticUnderlineWarning guisp=#F4C82D gui=undercurl
 ]]
 
--- minimal colorscheme based on old Eclipse IDE 2.1
+-- minimal colorscheme based on Eclipse IDE 3.6 Helios
 
 local attribute = "#646464"
 local comment = "#3F7F5F"

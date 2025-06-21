@@ -1,7 +1,7 @@
 -- leader -> space
 vim.g.mapleader = " "
 
-vim.cmd [[colorscheme ij]]
+vim.cmd [[colorscheme tp]]
 
 -- options
 local o = vim.opt

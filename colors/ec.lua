@@ -1,6 +1,6 @@
 vim.cmd [[highlight clear]]
 
--- minimal colorscheme based on old Eclipse IDE 2.1
+-- minimal colorscheme based on Eclipse IDE 2.1
 
 local comment = "#3F7F5F"
 local comment_doc = "#3F5FBF"
