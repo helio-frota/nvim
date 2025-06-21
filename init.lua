@@ -1,7 +1,7 @@
 -- leader -> space
 vim.g.mapleader = " "
 
-vim.cmd [[colorscheme tp]]
+vim.cmd [[colorscheme ij]]
 
 -- options
 local o = vim.opt
@@ -131,10 +131,10 @@ require("lazy").setup {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function(_, _)
-      vim.diagnostic.config {
-        virtual_lines = true,
-        severity_sort = true,
-      }
+      -- vim.diagnostic.config {
+      --   virtual_lines = false,
+      --   severity_sort = true,
+      -- }
     end,
   },
   {
@@ -188,7 +188,7 @@ require("lazy").setup {
     "echasnovski/mini.nvim",
     config = function()
       require("mini.align").setup()
-      require("mini.animate").setup()
+      -- require("mini.animate").setup()
       require("mini.basics").setup()
       require("mini.comment").setup()
       require("mini.cursorword").setup()
@@ -196,7 +196,7 @@ require("lazy").setup {
       require("mini.extra").setup()
       require("mini.files").setup()
       require("mini.git").setup()
-      require("mini.icons").setup()
+      -- require("mini.icons").setup()
       require("mini.indentscope").setup()
       require("mini.move").setup()
       require("mini.notify").setup()
@@ -369,6 +369,40 @@ require("lazy").setup {
       },
     },
   },
+  {
+    "stevearc/aerial.nvim",
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
+  {
+
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    config = function()
+      require("tiny-inline-diagnostic").setup {
+        hi = {
+          error = "DiagnosticError",
+          warn = "DiagnosticWarn",
+          info = "DiagnosticInfo",
+          hint = "DiagnosticHint",
+          arrow = "NonText",
+          background = "CursorLine",
+        },
+        transparent_bg = true,
+        options = {
+          use_icons_from_diagnostic = true,
+          throttle = 0,
+          enable_on_insert = true,
+          show_all_diags_on_cursorline = true,
+        },
+      }
+    end,
+  },
 }
 
 -- keymaps
@@ -422,6 +456,8 @@ k.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Quickfix diagnostic
 k.set("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
 k.set("n", "<leader>tb", ":GitBlameToggle<CR>", { desc = "Toggle blame" })
 
+-- toggle aerial -------
+k.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 local t = require "telescope.builtin"
 
 k.set("n", "<leader>sk", t.keymaps, { desc = "Search keymaps" })
