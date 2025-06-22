@@ -1,5 +1,11 @@
 vim.cmd [[highlight clear]]
 
+vim.cmd [[
+  hi DiagnosticUnderlineError guisp=#FF0080 gui=undercurl
+  hi DiagnosticUnderlineHint guisp=#F4C82D gui=undercurl
+  hi DiagnosticUnderlineWarning guisp=#F4C82D gui=undercurl
+]]
+
 -- minimal colorscheme based on Eclipse IDE 2.1
 
 local comment = "#3F7F5F"
@@ -69,6 +75,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "@type.builtin", { link = "Keyword2" })
       vim.api.nvim_set_hl(0, "@attribute", { link = "Keyword" })
       vim.api.nvim_set_hl(0, "@variable.builtin", { link = "Keyword" })
+      vim.api.nvim_set_hl(0, "@lsp.type.decorator.rust", { fg = "#646464" })
+      vim.api.nvim_set_hl(0, "@punctuation.special.rust", { fg = "#646464" })
+      vim.api.nvim_set_hl(0, "@lsp.typemod.deriveHelper.library.rust", { fg = "#646464" })
+      vim.api.nvim_set_hl(0, "@lsp.typemod.builtinAttribute.attribute.rust", { fg = "#646464" })
 
       -- mini status line
       vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#fefefe", bg = "#7F9FBF" })

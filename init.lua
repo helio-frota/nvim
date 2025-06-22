@@ -1,8 +1,6 @@
 -- leader -> space
 vim.g.mapleader = " "
 
-vim.cmd [[colorscheme tp]]
-
 -- options
 local o = vim.opt
 o.autoread = true
@@ -188,7 +186,6 @@ require("lazy").setup {
     "echasnovski/mini.nvim",
     config = function()
       require("mini.align").setup()
-      -- require("mini.animate").setup()
       require("mini.basics").setup()
       require("mini.comment").setup()
       require("mini.cursorword").setup()
@@ -196,7 +193,6 @@ require("lazy").setup {
       require("mini.extra").setup()
       require("mini.files").setup()
       require("mini.git").setup()
-      -- require("mini.icons").setup()
       require("mini.indentscope").setup()
       require("mini.move").setup()
       require("mini.notify").setup()
@@ -371,13 +367,61 @@ require("lazy").setup {
   },
   {
     "stevearc/aerial.nvim",
-    opts = {},
+    opts = {
+      open_automatic = true,
+      show_guides = true,
+      layout = {
+        min_width = 20,
+      },
+    },
     -- Optional dependencies
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
   },
+  {
+    "stevearc/stickybuf.nvim",
+    opts = {},
+  },
+  {
+    "folke/trouble.nvim",
+    opts = {},
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
+  },
+
   {
 
     "rachartier/tiny-inline-diagnostic.nvim",
@@ -402,6 +446,10 @@ require("lazy").setup {
         },
       }
     end,
+  },
+
+  {
+    "letorbi/vim-colors-modern-borland",
   },
 }
 
@@ -513,3 +561,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
   end,
 })
+
+-- To change the colorscheme:
+-- 1) Comment the global variable that is specific to the `letorbi/vim-colors-modern-borland` plugin
+-- 2) Change the colorscheme using one of these: `borland` (Turbo Pascal) - `tp` (old textpad) - `ec` (Eclipse IDE 2.1) - `ec36` (Eclipse IDE 3.6 Helios) - `ij` (Intellij IDEA 11.1.5)
+vim.g.BorlandStyle = "classic"
+vim.cmd [[colorscheme borland]]

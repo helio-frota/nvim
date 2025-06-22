@@ -18,8 +18,11 @@
   "pretty_hover": { "branch": "master", "commit": "bcc87e7a58225bed33f0881162f398c40c53049d" },
   "render-markdown.nvim": { "branch": "main", "commit": "95bc2eced6c3700942d54668d37c35f9bdb6a0cb" },
   "rustaceanvim": { "branch": "master", "commit": "b554761a920d807c3a7e8388d0dd34205ae4fd0d" },
+  "stickybuf.nvim": { "branch": "master", "commit": "0c1e5f1a3eb36eea2cea57083828269cc62c58e4" },
   "telescope-ui-select.nvim": { "branch": "master", "commit": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "1e2c51a7b530f41ea07d800ad5783c6caba48721" },
+  "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
+  "vim-colors-modern-borland": { "branch": "main", "commit": "f55137b8b3d6de24e35627ba01b2d6676aa41a2d" },
   "vim-helm": { "branch": "master", "commit": "cc5ac22444332381f38084a6c7f023c25eef6201" }
 }
