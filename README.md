@@ -2,7 +2,7 @@
 
 This repo contains my personal Neovim setup - designed to be fast, minimal, and powerful.
 
-## 📦 Key Features & Plugins
+## 📦 Plugins
 
 * Plugin manager: lazy.nvim
 * Plugins
@@ -46,8 +46,6 @@ This repo contains my personal Neovim setup - designed to be fast, minimal, and 
   * "folke/trouble.nvim"
   * "rachartier/tiny-inline-diagnostic.nvim"
   * "letorbi/vim-colors-modern-borland"
-* Colorscheme: Inspired by editors and IDEs I've used throughout my career
-(Turbo Pascal (learning how to program in pascal), TextPad (learning how to program in Java), Eclipse, and IntelliJ IDEA)
 
 ## 🧩 Structure
 
@@ -60,8 +58,10 @@ I went back to a single `init.lua` file:
   * `ec36.lua`
   * `ij.lua`
 
-
 ## 📸 Screenshots
+
+* Colorscheme: Based on the look of editors/IDEs I’ve used over the years.
+Turbo Pascal (where I first learned to code), TextPad (my Java beginnings), Eclipse, and IntelliJ IDEA
 
 ![00](00.png)
 
