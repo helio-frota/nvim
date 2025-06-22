@@ -565,5 +565,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- To change the colorscheme:
 -- 1) Comment the global variable that is specific to the `letorbi/vim-colors-modern-borland` plugin
 -- 2) Change the colorscheme using one of these: `borland` (Turbo Pascal) - `tp` (old textpad) - `ec` (Eclipse IDE 2.1) - `ec36` (Eclipse IDE 3.6 Helios) - `ij` (Intellij IDEA 11.1.5)
-vim.g.BorlandStyle = "classic"
-vim.cmd [[colorscheme borland]]
+-- vim.g.BorlandStyle = "modern"
+vim.cmd [[colorscheme ec]]
