@@ -81,6 +81,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "@lsp.typemod.deriveHelper.library.rust", { fg = "#646464" })
       vim.api.nvim_set_hl(0, "@lsp.typemod.builtinAttribute.attribute.rust", { fg = "#646464" })
       vim.api.nvim_set_hl(0, "@property.yaml", { fg = identifier })
+      vim.api.nvim_set_hl(0, "@property.json", { fg = identifier })
 
       -- mini status line
       vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#fefefe", bg = "#7F9FBF" })
