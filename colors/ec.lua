@@ -20,6 +20,7 @@ local cursor_line = "#E1EBE0"
 local keyword = "#7F0055"
 local keyword2 = "#000000"
 local ffunction = "#000000"
+local identifier = "#000000"
 local function_builtin = "#000000"
 local function_macro = "#000000"
 local line_number = "#000000"
@@ -79,6 +80,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "@punctuation.special.rust", { fg = "#646464" })
       vim.api.nvim_set_hl(0, "@lsp.typemod.deriveHelper.library.rust", { fg = "#646464" })
       vim.api.nvim_set_hl(0, "@lsp.typemod.builtinAttribute.attribute.rust", { fg = "#646464" })
+      vim.api.nvim_set_hl(0, "@property.yaml", { fg = identifier })
 
       -- mini status line
       vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#fefefe", bg = "#7F9FBF" })
