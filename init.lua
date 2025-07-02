@@ -128,12 +128,7 @@ require("lazy").setup {
   {
     "neovim/nvim-lspconfig",
     lazy = false,
-    config = function(_, _)
-      -- vim.diagnostic.config {
-      --   virtual_lines = false,
-      --   severity_sort = true,
-      -- }
-    end,
+    config = function() end,
   },
   {
     "mrcjkb/rustaceanvim",
@@ -156,6 +151,9 @@ require("lazy").setup {
             },
             procMacro = {
               enable = true,
+            },
+            cargo = {
+              features = "all",
             },
             check = {
               command = "clippy",
@@ -337,7 +335,9 @@ require("lazy").setup {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-    opts = {},
+    opts = {
+      render_modes = { "n", "c", "t" },
+    },
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -368,7 +368,6 @@ require("lazy").setup {
   {
     "stevearc/aerial.nvim",
     opts = {
-      open_automatic = true,
       show_guides = true,
       layout = {
         min_width = 20,

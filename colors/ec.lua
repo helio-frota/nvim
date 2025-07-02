@@ -29,6 +29,8 @@ local normal_bg = "#fefefe"
 local normal_fg = "#000000"
 local visual_bg = "#0078D7"
 local visual_fg = "#FEFEFE"
+local markup_raw_block_markdown = "#EEEEFF"
+local markup_heading_1_markdown = "#CCCCFF"
 
 -- local todo = "#7F9FBF"
 -- local errors = #FF0080
@@ -82,6 +84,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "@lsp.typemod.builtinAttribute.attribute.rust", { fg = "#646464" })
       vim.api.nvim_set_hl(0, "@property", { fg = identifier })
       vim.api.nvim_set_hl(0, "@property", { fg = identifier })
+      vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = markup_raw_block_markdown })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { bg = markup_heading_1_markdown })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { bg = markup_heading_1_markdown })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { bg = markup_heading_1_markdown })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { bg = markup_heading_1_markdown })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { bg = markup_heading_1_markdown })
+      vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { bg = markup_heading_1_markdown })
 
       -- mini status line
       vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#fefefe", bg = "#7F9FBF" })
