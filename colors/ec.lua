@@ -89,6 +89,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "@lsp.typemod.operator.macro.rust", { fg = rust_attribute_macro })
       vim.api.nvim_set_hl(0, "@lsp.typemod.namespace.attribute.rust", { fg = rust_attribute_macro })
       vim.api.nvim_set_hl(0, "@lsp.typemod.macro.library.rust", { fg = keyword })
+      vim.api.nvim_set_hl(0, "@lsp.typemod.number.attribute.rust", { fg = rust_attribute_macro })
       vim.api.nvim_set_hl(0, "@property", { fg = identifier })
       vim.api.nvim_set_hl(0, "@property", { fg = identifier })
       vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = markup_raw_block_markdown })
