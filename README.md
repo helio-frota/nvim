@@ -1,4 +1,3 @@
-# 🛠️ My Neovim configuration
+# My Neovim config
 
-This repo contains my personal Neovim setup - designed to be fast, minimal, and powerful.
 
