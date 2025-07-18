@@ -1,6 +1,5 @@
 -- leader -> space
 vim.g.mapleader = " "
-
 -- options
 local o = vim.opt
 o.autoread = true
@@ -113,7 +112,7 @@ require("lazy").setup {
     "mason-org/mason.nvim",
     config = function()
       require("mason").setup {
-        PATH = "append",
+        -- PATH = "append",
       }
     end,
   },
@@ -185,7 +184,6 @@ require("lazy").setup {
     config = function()
       require("mini.align").setup()
       require("mini.basics").setup()
-      require("mini.comment").setup()
       require("mini.cursorword").setup()
       require("mini.diff").setup()
       require("mini.extra").setup()
@@ -196,7 +194,6 @@ require("lazy").setup {
       require("mini.notify").setup()
       require("mini.pairs").setup()
       require("mini.pick").setup()
-      require("mini.starter").setup()
       require("mini.tabline").setup()
       require("mini.trailspace").setup()
 
@@ -334,7 +331,7 @@ require("lazy").setup {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
     opts = {
       render_modes = { "n", "c", "t" },
     },
@@ -373,7 +370,6 @@ require("lazy").setup {
         min_width = 20,
       },
     },
-    -- Optional dependencies
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
@@ -420,9 +416,7 @@ require("lazy").setup {
       },
     },
   },
-
   {
-
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy",
     priority = 1000,
@@ -446,7 +440,6 @@ require("lazy").setup {
       }
     end,
   },
-
   {
     "letorbi/vim-colors-modern-borland",
   },
@@ -486,7 +479,6 @@ k.set("n", "<F2>", function()
 end, { desc = "Terminal" })
 
 -- Copy, Paste, Undo, Redo, Select all, Join lines
-k.set("n", "<C-s>", ":write<CR>")
 k.set("v", "<C-c>", '"+y', { silent = true })
 k.set("n", "<C-v>", '"+p')
 k.set("i", "<C-v>", "<C-r>+")
@@ -544,14 +536,6 @@ k.set("n", "<leader>e", function()
   minifiles.open(vim.api.nvim_buf_get_name(0))
   minifiles.reveal_cwd()
 end, { desc = "Open Mini Files" })
-
-k.set("n", "<leader>cf", function()
-  local dir = vim.fn.expand "%:h"
-  local filename = vim.fn.input("New buffer: ", dir .. "/")
-  if filename ~= "" then
-    vim.cmd("e " .. filename)
-  end
-end, { desc = "New buffer here" })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
