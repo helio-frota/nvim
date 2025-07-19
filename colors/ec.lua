@@ -46,6 +46,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "Comment", { fg = comment })
       vim.api.nvim_set_hl(0, "CommentDoc", { fg = comment_doc })
       vim.api.nvim_set_hl(0, "CursorLine", { bg = cursor_line })
+      vim.api.nvim_set_hl(0, "ColorColumn", { bg = cursor_line })
       vim.api.nvim_set_hl(0, "Function", { fg = ffunction })
       vim.api.nvim_set_hl(0, "FunctionBuiltin", { fg = function_builtin })
       vim.api.nvim_set_hl(0, "FunctionMacro", { fg = function_macro })

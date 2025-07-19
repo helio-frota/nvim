@@ -9,6 +9,12 @@ o.backup = false
 o.backspace = "indent,eol,start"
 o.breakindent = true
 o.clipboard = "unnamedplus"
+o.colorcolumn = "85"
+-- https://doc.rust-lang.org/edition-guide/rust-2024/rustfmt-formatting-fixes.html
+vim.api.nvim_create_autocmd(
+  "Filetype",
+  { pattern = "rust", command = "set colorcolumn=119" }
+)
 o.completeopt = "menuone,noinsert,noselect"
 o.cmdheight = 0
 o.conceallevel = 1
@@ -127,32 +133,15 @@ require("lazy").setup {
   {
     "neovim/nvim-lspconfig",
     lazy = false,
-    config = function() end,
-  },
-  {
-    "mrcjkb/rustaceanvim",
-    version = "^6",
-    lazy = false,
-    ft = { "rust" },
-    config = function(_, opts)
-      vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
-    end,
-    opts = {
-      server = {
+    config = function()
+      vim.lsp.config("rust_analyzer", {
         settings = {
-          standalone = false,
           ["rust-analyzer"] = {
-            files = {
-              exclude = {
-                "target/",
-                ".git",
-              },
-            },
-            procMacro = {
-              enable = true,
-            },
             cargo = {
               features = "all",
+            },
+            checkOnSave = {
+              enable = true,
             },
             check = {
               command = "clippy",
@@ -167,6 +156,19 @@ require("lazy").setup {
                 "--no-deps",
               },
             },
+            imports = {
+              group = {
+                enable = false,
+              },
+            },
+            procMacro = {
+              enable = true,
+            },
+            completion = {
+              postfix = {
+                enable = false,
+              },
+            },
             inlayHints = {
               lifetimeElisionHints = {
                 enable = true,
@@ -175,8 +177,9 @@ require("lazy").setup {
             },
           },
         },
-      },
-    },
+      })
+      vim.lsp.enable "rust_analyzer"
+    end,
   },
   -- the awesome mini
   {
@@ -207,10 +210,22 @@ require("lazy").setup {
       local hipatterns = require "mini.hipatterns"
       hipatterns.setup {
         highlighters = {
-          fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-          hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
-          todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
-          note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+          fixme = {
+            pattern = "%f[%w]()FIXME()%f[%W]",
+            group = "MiniHipatternsFixme",
+          },
+          hack = {
+            pattern = "%f[%w]()HACK()%f[%W]",
+            group = "MiniHipatternsHack",
+          },
+          todo = {
+            pattern = "%f[%w]()TODO()%f[%W]",
+            group = "MiniHipatternsTodo",
+          },
+          note = {
+            pattern = "%f[%w]()NOTE()%f[%W]",
+            group = "MiniHipatternsNote",
+          },
           hex_color = hipatterns.gen_highlighter.hex_color(),
         },
       }
@@ -300,12 +315,37 @@ require("lazy").setup {
     keys = {
       { "<leader>A", "<cmd>HurlRunner<CR>", desc = "[HURL] Run All requests" },
       { "<leader>a", "<cmd>HurlRunnerAt<CR>", desc = "[HURL] Run Api request" },
-      { "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "[HURL] Run Api request to entry" },
-      { "<leader>tE", "<cmd>HurlRunnerToEnd<CR>", desc = "[HURL] Run Api request from current entry to end" },
-      { "<leader>tm", "<cmd>HurlToggleMode<CR>", desc = "[HURL] Hurl Toggle Mode" },
-      { "<leader>tv", "<cmd>HurlVerbose<CR>", desc = "[HURL] Run Api in verbose mode" },
-      { "<leader>tV", "<cmd>HurlVeryVerbose<CR>", desc = "[HURL] Run Api in very verbose mode" },
-      { "<leader>h", ":HurlRunner<CR>", desc = "[HURL] Hurl Runner", mode = "v" },
+      {
+        "<leader>te",
+        "<cmd>HurlRunnerToEntry<CR>",
+        desc = "[HURL] Run Api request to entry",
+      },
+      {
+        "<leader>tE",
+        "<cmd>HurlRunnerToEnd<CR>",
+        desc = "[HURL] Run Api request from current entry to end",
+      },
+      {
+        "<leader>tm",
+        "<cmd>HurlToggleMode<CR>",
+        desc = "[HURL] Hurl Toggle Mode",
+      },
+      {
+        "<leader>tv",
+        "<cmd>HurlVerbose<CR>",
+        desc = "[HURL] Run Api in verbose mode",
+      },
+      {
+        "<leader>tV",
+        "<cmd>HurlVeryVerbose<CR>",
+        desc = "[HURL] Run Api in very verbose mode",
+      },
+      {
+        "<leader>h",
+        ":HurlRunner<CR>",
+        desc = "[HURL] Hurl Runner",
+        mode = "v",
+      },
     },
     config = function()
       require("hurl").setup {
@@ -320,6 +360,12 @@ require("lazy").setup {
     "towolf/vim-helm",
   },
   {
+    "andymass/vim-matchup",
+    config = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end,
+  },
+  {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
     opts = {
@@ -331,7 +377,10 @@ require("lazy").setup {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "echasnovski/mini.nvim",
+    },
     opts = {
       render_modes = { "n", "c", "t" },
     },
@@ -456,10 +505,8 @@ k.set("n", "<C-j>", "<C-w><C-j>")
 k.set("n", "<C-h>", "<C-w><C-h>")
 k.set("n", "<C-l>", "<C-w><C-l>")
 
-k.set("n", "<left>", '<cmd>echo "Use h to move 󱗗"<CR>')
-k.set("n", "<right>", '<cmd>echo "Use l to move 󱗗"<CR>')
-k.set("n", "<up>", '<cmd>echo "Use k to move 󱗗"<CR>')
-k.set("n", "<down>", '<cmd>echo "Use j to move 󱗗"<CR>')
+k.set("n", "<left>", ":bp<cr>")
+k.set("n", "<right>", ":bn<cr>")
 
 k.set("v", "<", "<gv", { desc = "Indent left" })
 k.set("v", ">", ">gv", { desc = "Indent right" })
@@ -472,7 +519,12 @@ end)
 -- Buffer delete
 k.set("n", "<C-ESC>", ":bd<CR>")
 -- File delete
-k.set("n", "<S-Delete>", ":!rm %<CR>:bd!<CR>", { noremap = true, silent = true })
+k.set(
+  "n",
+  "<S-Delete>",
+  ":!rm %<CR>:bd!<CR>",
+  { noremap = true, silent = true }
+)
 -- Open nvim terminal
 k.set("n", "<F2>", function()
   vim.cmd "botright split term://$SHELL"
@@ -491,7 +543,12 @@ k.set("n", "<C-a>", "ggVG", { noremap = true })
 k.set("n", "J", "mzJ`z")
 
 -- Leader ----------
-k.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Quickfix diagnostic list" })
+k.set(
+  "n",
+  "<leader>q",
+  vim.diagnostic.setloclist,
+  { desc = "Quickfix diagnostic list" }
+)
 k.set("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
 k.set("n", "<leader>tb", ":GitBlameToggle<CR>", { desc = "Toggle blame" })
 
@@ -517,7 +574,12 @@ k.set("n", "<leader>lf", function()
   }
 end, { desc = "[LSP]Show refs" })
 
-k.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "[LSP] Code actions" })
+k.set(
+  { "n", "v" },
+  "<leader>la",
+  vim.lsp.buf.code_action,
+  { desc = "[LSP] Code actions" }
+)
 
 k.set("n", "<leader>rn", function()
   vim.lsp.buf.rename()
@@ -546,7 +608,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- To change the colorscheme:
--- 1) Comment the global variable that is specific to the `letorbi/vim-colors-modern-borland` plugin
--- 2) Change the colorscheme using one of these: `borland` (Turbo Pascal) - `tp` (old textpad) - `ec` (Eclipse IDE 2.1) - `ec36` (Eclipse IDE 3.6 Helios) - `ij` (Intellij IDEA 11.1.5)
+-- 1) Comment the global variable that is specific to the
+-- `letorbi/vim-colors-modern-borland` plugin
+-- 2) Change the colorscheme using one of these:
+-- `borland` (Turbo Pascal) - `tp` (old textpad) - `ec` (Eclipse IDE 2.1)
+-- `ec36` (Eclipse IDE 3.6 Helios) - `ij` (Intellij IDEA 11.1.5)
 -- vim.g.BorlandStyle = "modern"
 vim.cmd [[colorscheme ec]]
