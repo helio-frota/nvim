@@ -138,13 +138,10 @@ require("lazy").setup {
         settings = {
           ["rust-analyzer"] = {
             cargo = {
-              features = "all",
-            },
-            checkOnSave = {
-              enable = true,
+              features = "all", -- NOTE: not default
             },
             check = {
-              command = "clippy",
+              command = "clippy", -- NOTE: the default is "check"
               extraArgs = {
                 "--",
                 "-D",
@@ -156,23 +153,13 @@ require("lazy").setup {
                 "--no-deps",
               },
             },
-            imports = {
-              group = {
-                enable = false,
-              },
-            },
-            procMacro = {
-              enable = true,
-            },
-            completion = {
-              postfix = {
-                enable = false,
-              },
-            },
-            inlayHints = {
-              lifetimeElisionHints = {
-                enable = true,
-                useParameterNames = true,
+            files = {
+              exclude = {
+                ".git",
+                ".github",
+                "bin",
+                "node_modules",
+                "target",
               },
             },
           },
@@ -277,7 +264,7 @@ require("lazy").setup {
   {
     "nvim-telescope/telescope.nvim",
     event = "VimEnter",
-    branch = "0.1.x",
+    branch = "master",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-ui-select.nvim" },
