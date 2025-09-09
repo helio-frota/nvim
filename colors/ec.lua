@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "Comment", { fg = comment })
       vim.api.nvim_set_hl(0, "CommentDoc", { fg = comment_doc })
       vim.api.nvim_set_hl(0, "CursorLine", { bg = cursor_line })
-      vim.api.nvim_set_hl(0, "ColorColumn", { bg = cursor_line })
+      vim.api.nvim_set_hl(0, "ColorColumn", { link = "CursorLine" })
       vim.api.nvim_set_hl(0, "Function", { fg = ffunction })
       vim.api.nvim_set_hl(0, "FunctionBuiltin", { fg = function_builtin })
       vim.api.nvim_set_hl(0, "FunctionMacro", { fg = function_macro })
@@ -80,43 +80,155 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "@type.builtin", { link = "Keyword2" })
       vim.api.nvim_set_hl(0, "@attribute", { link = "Keyword" })
       vim.api.nvim_set_hl(0, "@variable.builtin", { link = "Keyword" })
-      vim.api.nvim_set_hl(0, "@lsp.type.decorator.rust", { fg = rust_attribute_macro })
-      vim.api.nvim_set_hl(0, "@punctuation.special.rust", { fg = rust_attribute_macro })
-      vim.api.nvim_set_hl(0, "@lsp.typemod.deriveHelper.library.rust", { fg = rust_attribute_macro })
-      vim.api.nvim_set_hl(0, "@lsp.typemod.builtinAttribute.attribute.rust", { fg = rust_attribute_macro })
-      vim.api.nvim_set_hl(0, "@lsp.typemod.attributeBracket.attribute.rust", { fg = rust_attribute_macro })
-      vim.api.nvim_set_hl(0, "@lsp.typemod.generic.attribute.rust", { fg = rust_attribute_macro })
-      vim.api.nvim_set_hl(0, "@lsp.typemod.derive.macro.rust", { fg = rust_attribute_macro })
-      vim.api.nvim_set_hl(0, "@lsp.typemod.operator.macro.rust", { fg = rust_attribute_macro })
-      vim.api.nvim_set_hl(0, "@lsp.typemod.namespace.attribute.rust", { fg = rust_attribute_macro })
-      vim.api.nvim_set_hl(0, "@lsp.typemod.macro.library.rust", { fg = keyword })
-      vim.api.nvim_set_hl(0, "@lsp.typemod.number.attribute.rust", { fg = rust_attribute_macro })
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.type.decorator.rust",
+        { fg = rust_attribute_macro }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@punctuation.special.rust",
+        { fg = rust_attribute_macro }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.typemod.deriveHelper.library.rust",
+        { fg = rust_attribute_macro }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.typemod.builtinAttribute.attribute.rust",
+        { fg = rust_attribute_macro }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.typemod.attributeBracket.attribute.rust",
+        { fg = rust_attribute_macro }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.typemod.generic.attribute.rust",
+        { fg = rust_attribute_macro }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.typemod.derive.macro.rust",
+        { fg = rust_attribute_macro }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.typemod.operator.macro.rust",
+        { fg = rust_attribute_macro }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.typemod.namespace.attribute.rust",
+        { fg = rust_attribute_macro }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.typemod.macro.library.rust",
+        { fg = keyword }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "@lsp.typemod.number.attribute.rust",
+        { fg = rust_attribute_macro }
+      )
       vim.api.nvim_set_hl(0, "@property", { fg = identifier })
       vim.api.nvim_set_hl(0, "@property", { fg = identifier })
-      vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = markup_raw_block_markdown })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { bg = markup_heading_1_markdown })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { bg = markup_heading_1_markdown })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { bg = markup_heading_1_markdown })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { bg = markup_heading_1_markdown })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { bg = markup_heading_1_markdown })
-      vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { bg = markup_heading_1_markdown })
+      vim.api.nvim_set_hl(
+        0,
+        "RenderMarkdownCode",
+        { bg = markup_raw_block_markdown }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "RenderMarkdownH1Bg",
+        { bg = markup_heading_1_markdown }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "RenderMarkdownH2Bg",
+        { bg = markup_heading_1_markdown }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "RenderMarkdownH3Bg",
+        { bg = markup_heading_1_markdown }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "RenderMarkdownH4Bg",
+        { bg = markup_heading_1_markdown }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "RenderMarkdownH5Bg",
+        { bg = markup_heading_1_markdown }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "RenderMarkdownH6Bg",
+        { bg = markup_heading_1_markdown }
+      )
 
       -- mini status line
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#fefefe", bg = "#7F9FBF" })
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeInsert", { fg = "#fefefe", bg = "#3F7F5F" })
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeVisual", { fg = "#fefefe", bg = "#3F5FBF" })
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeReplace", { fg = "#fefefe", bg = "#F4C82D" })
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeCommand", { fg = "#fefefe", bg = "#2A00FF" })
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeNormal",
+        { fg = "#fefefe", bg = "#7F9FBF" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeInsert",
+        { fg = "#fefefe", bg = "#3F7F5F" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeVisual",
+        { fg = "#fefefe", bg = "#3F5FBF" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeReplace",
+        { fg = "#fefefe", bg = "#F4C82D" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeCommand",
+        { fg = "#fefefe", bg = "#2A00FF" }
+      )
 
-      vim.api.nvim_set_hl(0, "MiniHipatternsFixme", { fg = "#fefefe", bg = "#FF0080" })
-      vim.api.nvim_set_hl(0, "MiniHipatternsHack", { fg = "#fefefe", bg = "#F4C82D" })
-      vim.api.nvim_set_hl(0, "MiniHipatternsNote", { fg = "#fefefe", bg = "#3F5FBF" })
-      vim.api.nvim_set_hl(0, "MiniHipatternsTodo", { fg = "#fefefe", bg = "#7F9FBF" })
+      vim.api.nvim_set_hl(
+        0,
+        "MiniHipatternsFixme",
+        { fg = "#fefefe", bg = "#FF0080" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniHipatternsHack",
+        { fg = "#fefefe", bg = "#F4C82D" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniHipatternsNote",
+        { fg = "#fefefe", bg = "#3F5FBF" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniHipatternsTodo",
+        { fg = "#fefefe", bg = "#7F9FBF" }
+      )
 
       vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#FF0080", bold = true })
       vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#F4C82D", bold = true })
       vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#3F5FBF" })
-      vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#3F7F5F", italic = true })
+      vim.api.nvim_set_hl(
+        0,
+        "DiagnosticHint",
+        { fg = "#3F7F5F", italic = true }
+      )
     end)
   end,
 })

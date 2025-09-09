@@ -31,6 +31,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "Character", { fg = character })
       vim.api.nvim_set_hl(0, "Comment", { fg = comment })
       vim.api.nvim_set_hl(0, "CursorLine", { bg = cursor_line })
+      vim.api.nvim_set_hl(0, "ColorColumn", { link = "CursorLine" })
       vim.api.nvim_set_hl(0, "Function", { fg = ffunction })
       vim.api.nvim_set_hl(0, "FunctionBuiltin", { fg = function_builtin })
       vim.api.nvim_set_hl(0, "FunctionMacro", { fg = function_macro })
@@ -64,21 +65,61 @@ vim.api.nvim_create_autocmd("ColorScheme", {
       vim.api.nvim_set_hl(0, "@variable.builtin", { link = "Keyword" })
 
       -- mini status line
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#fefefe", bg = "#465A7D" })
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeInsert", { fg = "#fefefe", bg = "#008000" })
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeVisual", { fg = "#fefefe", bg = "#0078D7" })
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeReplace", { fg = "#fefefe", bg = "#E6AC00" })
-      vim.api.nvim_set_hl(0, "MiniStatuslineModeCommand", { fg = "#fefefe", bg = "#0000FF" })
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeNormal",
+        { fg = "#fefefe", bg = "#465A7D" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeInsert",
+        { fg = "#fefefe", bg = "#008000" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeVisual",
+        { fg = "#fefefe", bg = "#0078D7" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeReplace",
+        { fg = "#fefefe", bg = "#E6AC00" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniStatuslineModeCommand",
+        { fg = "#fefefe", bg = "#0000FF" }
+      )
 
-      vim.api.nvim_set_hl(0, "MiniHipatternsFixme", { fg = "#fefefe", bg = "#FF0000" })
-      vim.api.nvim_set_hl(0, "MiniHipatternsHack", { fg = "#fefefe", bg = "#E6AC00" })
-      vim.api.nvim_set_hl(0, "MiniHipatternsNote", { fg = "#fefefe", bg = "#008000" })
-      vim.api.nvim_set_hl(0, "MiniHipatternsTodo", { fg = "#fefefe", bg = "#0000FF" })
+      vim.api.nvim_set_hl(
+        0,
+        "MiniHipatternsFixme",
+        { fg = "#fefefe", bg = "#FF0000" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniHipatternsHack",
+        { fg = "#fefefe", bg = "#E6AC00" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniHipatternsNote",
+        { fg = "#fefefe", bg = "#008000" }
+      )
+      vim.api.nvim_set_hl(
+        0,
+        "MiniHipatternsTodo",
+        { fg = "#fefefe", bg = "#0000FF" }
+      )
 
       vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#FF0000", bold = true })
       vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#E6AC00", bold = true })
       vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#0000FF" })
-      vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#008000", italic = true })
+      vim.api.nvim_set_hl(
+        0,
+        "DiagnosticHint",
+        { fg = "#008000", italic = true }
+      )
     end)
   end,
 })

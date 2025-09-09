@@ -61,7 +61,16 @@ require("lazy").setup {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = { "lua" },
+      ensure_installed = {
+        "lua",
+        "rust",
+        "typescript",
+        "javascript",
+        "fish",
+        "bash",
+        "json",
+        "toml",
+      },
       sync_install = false,
       highlight = { enable = true },
       indent = { enable = true },
@@ -77,11 +86,33 @@ require("lazy").setup {
     config = function()
       require("conform").setup {
         formatters_by_ft = {
+          javascript = { "prettier" },
+          json = { "prettier" },
           lua = { "stylua" },
           rust = { "rustfmt", lsp_format = "fallback" },
+          typescript = { "prettier" },
         },
         format_on_save = {
           timeout_ms = 500,
+        },
+      }
+    end,
+  },
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+    config = function()
+      require("typescript-tools").setup {
+        on_attach = function(client)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
+        settings = {
+          jsx_close_tag = {
+            enable = true,
+            filetypes = { "javascriptreact", "typescriptreact" },
+          },
         },
       }
     end,
@@ -107,7 +138,7 @@ require("lazy").setup {
         },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "buffer" },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" },
     },
@@ -126,7 +157,16 @@ require("lazy").setup {
     "mason-org/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "taplo" },
+        ensure_installed = {
+          "lua_ls",
+          "taplo",
+          "eslint",
+          "prettier",
+          "rust-analyzer",
+          "eslint-lsp",
+          "jsonlint",
+          "typescript-language-server",
+        },
       }
     end,
   },
@@ -168,6 +208,10 @@ require("lazy").setup {
       vim.lsp.enable "rust_analyzer"
     end,
   },
+  {
+    "j-hui/fidget.nvim",
+    opts = {},
+  },
   -- the awesome mini
   {
     "echasnovski/mini.nvim",
@@ -181,7 +225,6 @@ require("lazy").setup {
       require("mini.git").setup()
       require("mini.indentscope").setup()
       require("mini.move").setup()
-      require("mini.notify").setup()
       require("mini.pairs").setup()
       require("mini.pick").setup()
       require("mini.tabline").setup()
@@ -335,11 +378,7 @@ require("lazy").setup {
       },
     },
     config = function()
-      require("hurl").setup {
-        env_file = {
-          "hurl.env",
-        },
-      }
+      require("hurl").setup {}
     end,
   },
   -- helm-chart template syntax support
@@ -347,18 +386,12 @@ require("lazy").setup {
     "towolf/vim-helm",
   },
   {
-    "andymass/vim-matchup",
-    config = function()
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end,
-  },
-  {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
     opts = {
       enabled = false,
       message_template = " <author>-<summary>•<date>",
-      date_format = "%m-%d-%Y %H:%M:%S",
+      date_format = "%d-%m-%Y %H:%M:%S",
       virtual_text_column = 1,
     },
   },
@@ -412,47 +445,6 @@ require("lazy").setup {
     },
   },
   {
-    "stevearc/stickybuf.nvim",
-    opts = {},
-  },
-  {
-    "folke/trouble.nvim",
-    opts = {},
-    cmd = "Trouble",
-    keys = {
-      {
-        "<leader>xx",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
-      },
-      {
-        "<leader>xX",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics (Trouble)",
-      },
-      {
-        "<leader>cs",
-        "<cmd>Trouble symbols toggle focus=false<cr>",
-        desc = "Symbols (Trouble)",
-      },
-      {
-        "<leader>cl",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP Definitions / references / ... (Trouble)",
-      },
-      {
-        "<leader>xL",
-        "<cmd>Trouble loclist toggle<cr>",
-        desc = "Location List (Trouble)",
-      },
-      {
-        "<leader>xQ",
-        "<cmd>Trouble qflist toggle<cr>",
-        desc = "Quickfix List (Trouble)",
-      },
-    },
-  },
-  {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy",
     priority = 1000,
@@ -477,111 +469,113 @@ require("lazy").setup {
     end,
   },
   {
-    "letorbi/vim-colors-modern-borland",
+    "vim-test/vim-test",
+    dependencies = { "tpope/vim-dispatch" },
+    init = function()
+      local map = vim.keymap.set
+      map("n", "<leader>tt", "<cmd>TestNearest<cr>", { desc = "Test nearest" })
+      map("n", "<leader>tf", "<cmd>TestFile<cr>", { desc = "Test file" })
+      map("n", "<leader>tl", "<cmd>TestLast<cr>", { desc = "Test last" })
+    end,
   },
 }
 
 -- keymaps
-local k = vim.keymap
+local map = vim.keymap.set
 
 -- Non-leader ----------
 
 -- Navigation
-k.set("n", "<C-k>", "<C-w><C-k>")
-k.set("n", "<C-j>", "<C-w><C-j>")
-k.set("n", "<C-h>", "<C-w><C-h>")
-k.set("n", "<C-l>", "<C-w><C-l>")
+map("n", "<C-k>", "<C-w><C-k>")
+map("n", "<C-j>", "<C-w><C-j>")
+map("n", "<C-h>", "<C-w><C-h>")
+map("n", "<C-l>", "<C-w><C-l>")
 
-k.set("n", "<left>", ":bp<cr>")
-k.set("n", "<right>", ":bn<cr>")
+map("n", "<left>", ":bp<cr>")
+map("n", "<right>", ":bn<cr>")
 
-k.set("v", "<", "<gv", { desc = "Indent left" })
-k.set("v", ">", ">gv", { desc = "Indent right" })
+map("v", "<", "<gv", { desc = "Indent left" })
+map("v", ">", ">gv", { desc = "Indent right" })
 
 -- Toggle
-k.set("n", "<C-i>", function()
+map("n", "<C-i>", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 
 -- Buffer delete
-k.set("n", "<C-ESC>", ":bd<CR>")
+map("n", "<C-ESC>", ":bd<CR>")
 -- File delete
-k.set(
-  "n",
-  "<S-Delete>",
-  ":!rm %<CR>:bd!<CR>",
-  { noremap = true, silent = true }
-)
+map("n", "<S-Delete>", ":!rm %<CR>:bd!<CR>", { noremap = true, silent = true })
 -- Open nvim terminal
-k.set("n", "<F2>", function()
+map("n", "<F2>", function()
   vim.cmd "botright split term://$SHELL"
 end, { desc = "Terminal" })
 
 -- Copy, Paste, Undo, Redo, Select all, Join lines
-k.set("v", "<C-c>", '"+y', { silent = true })
-k.set("n", "<C-v>", '"+p')
-k.set("i", "<C-v>", "<C-r>+")
-k.set("v", "<C-x>", '"+d')
-k.set("n", "<C-z>", "u")
-k.set("i", "<C-z>", "<C-o>u")
-k.set("n", "<C-y>", "<C-r>")
-k.set("i", "<C-y>", "<C-o><C-r>")
-k.set("n", "<C-a>", "ggVG", { noremap = true })
-k.set("n", "J", "mzJ`z")
+map("v", "<C-c>", '"+y', { silent = true })
+map("n", "<C-v>", '"+p')
+map("i", "<C-v>", "<C-r>+")
+map("v", "<C-x>", '"+d')
+map("n", "<C-z>", "u")
+map("i", "<C-z>", "<C-o>u")
+map("n", "<C-y>", "<C-r>")
+map("i", "<C-y>", "<C-o><C-r>")
+map("n", "<C-a>", "ggVG", { noremap = true })
+map("n", "J", "mzJ`z")
 
 -- Leader ----------
-k.set(
+map(
   "n",
   "<leader>q",
   vim.diagnostic.setloclist,
   { desc = "Quickfix diagnostic list" }
 )
-k.set("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
-k.set("n", "<leader>tb", ":GitBlameToggle<CR>", { desc = "Toggle blame" })
+map("v", "<leader>si", ":sort i<CR>", { desc = "Sort lines" })
+map("n", "<leader>tb", ":GitBlameToggle<CR>", { desc = "Toggle blame" })
 
 -- toggle aerial -------
-k.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+map("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 local t = require "telescope.builtin"
 
-k.set("n", "<leader>sk", t.keymaps, { desc = "Search keymaps" })
-k.set("n", "<leader>sf", t.find_files, { desc = "Search files" })
-k.set("n", "<leader>sw", t.grep_string, { desc = "Search current Word" })
-k.set("n", "<leader>sg", t.live_grep, { desc = "Search by grep" })
-k.set("n", "<leader>sd", t.diagnostics, { desc = "Search diagnostics" })
-k.set("n", "<leader>s.", t.oldfiles, { desc = "Recent files" })
+map("n", "<leader>sk", t.keymaps, { desc = "Search keymaps" })
+map("n", "<leader>sf", t.find_files, { desc = "Search files" })
+map("n", "<leader>sw", t.grep_string, { desc = "Search current Word" })
+map("n", "<leader>sg", t.live_grep, { desc = "Search by grep" })
+map("n", "<leader>sd", t.diagnostics, { desc = "Search diagnostics" })
+map("n", "<leader>s.", t.oldfiles, { desc = "Recent files" })
 
 local ho = require "pretty_hover"
-k.set("n", "K", function()
+map("n", "K", function()
   ho.hover()
 end, { desc = "[LSP]Show docs" })
 
-k.set("n", "<leader>lf", function()
+map("n", "<leader>lf", function()
   t.lsp_references {
     fname_width = 60,
   }
 end, { desc = "[LSP]Show refs" })
 
-k.set(
+map(
   { "n", "v" },
   "<leader>la",
   vim.lsp.buf.code_action,
   { desc = "[LSP] Code actions" }
 )
 
-k.set("n", "<leader>rn", function()
+map("n", "<leader>rn", function()
   vim.lsp.buf.rename()
 end, { desc = "[LSP]Rename" })
 
-k.set("n", "gd", function()
+map("n", "gd", function()
   vim.lsp.buf.definition()
 end, { desc = "[LSP]Go to def" })
 
-vim.keymap.set("n", "gi", function()
+map("n", "gi", function()
   vim.lsp.buf.implementations()
 end, { desc = "[LSP]Go to Implementation" })
 
 local minifiles = require "mini.files"
-k.set("n", "<leader>e", function()
+map("n", "<leader>e", function()
   minifiles.open(vim.api.nvim_buf_get_name(0))
   minifiles.reveal_cwd()
 end, { desc = "Open Mini Files" })
@@ -594,11 +588,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- To change the colorscheme:
--- 1) Comment the global variable that is specific to the
--- `letorbi/vim-colors-modern-borland` plugin
--- 2) Change the colorscheme using one of these:
--- `borland` (Turbo Pascal) - `tp` (old textpad) - `ec` (Eclipse IDE 2.1)
--- `ec36` (Eclipse IDE 3.6 Helios) - `ij` (Intellij IDEA 11.1.5)
--- vim.g.BorlandStyle = "modern"
-vim.cmd [[colorscheme ec]]
+-- Change the colorscheme using one of these:
+-- `tp` (old textpad) - `ec` (Eclipse IDE 2.1) - `ec36` (Eclipse IDE 3.6 Helios)
+vim.cmd [[colorscheme ec36]]
